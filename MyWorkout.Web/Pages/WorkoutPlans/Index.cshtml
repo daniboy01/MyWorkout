@@ -1,0 +1,29 @@
+﻿@page "/Workouts"
+@model MyWorkout.Web.Pages.WorkoutPlans.IndexModel
+@{
+}
+
+<div class="row">
+    @foreach (var plan in Model.WorkoutPlans)
+    {
+        <div class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex">
+            <div class="card">
+                <img class="card-img-top" src="~/images/workoutPlan_covers/@(plan.Id).jpg"
+                     alt="@plan.Title" title="@plan.Title" />
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a asp-page="/WorkoutPlans/Details" asp-route-id="@plan.Id">@plan.Title</a>
+                    </h5>
+                    <h6 class="card-subtitle">
+                        Edzés terv kreátora
+                    </h6>
+                    <div class="card-text">
+                        <p class="small">
+                            @plan.Description.Substring(0, Math.Min(300, plan.Description.Length))
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

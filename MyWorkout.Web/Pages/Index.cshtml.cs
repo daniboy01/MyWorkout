@@ -19,16 +19,8 @@ namespace MyWorkout.Web.Pages
             _logger = logger;
         }
 
-
-        public IReadOnlyCollection<Exercise> Exercises { get; set; }
-        public IReadOnlyCollection<WorkoutPlan> WorkoutPlans { get; set; }
-        public IReadOnlyCollection<Category> Categories { get; set; }
-
         public void OnGet([FromServices] MyWorkoutDbContext dbcontext)
         {
-            Exercises = dbcontext.Exercises.ToList();
-            WorkoutPlans = dbcontext.WorkoutPlans.ToList();
-            Categories = dbcontext.Categories.ToList();
         }
     }
 }

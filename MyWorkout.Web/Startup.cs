@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MyWorkout.Bll.Services;
 using MyWorkout.Dal;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,8 @@ namespace MyWorkout.Web
                 );
 
             services.AddRazorPages();
+
+            services.AddScoped<WorkoutPlanService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

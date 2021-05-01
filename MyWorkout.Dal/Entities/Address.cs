@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace MyWorkout.Dal.Entities
@@ -11,6 +12,7 @@ namespace MyWorkout.Dal.Entities
         public string City { get; set; }
         public string Street { get; set; }
         public string Number { get; set; }
+        [ForeignKey("User")]
         public int UserId { get; set; }
 
         public virtual User User { get; set; }

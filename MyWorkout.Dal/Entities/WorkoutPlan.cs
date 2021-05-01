@@ -14,5 +14,6 @@ namespace MyWorkout.Dal.Entities
         public virtual User User { get; set; }
         public virtual Category Category { get; set; }
         public virtual ICollection<Exercise> Exercises { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

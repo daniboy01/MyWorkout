@@ -12,6 +12,7 @@ namespace MyWorkout.Dal.Entities
         public int AddressId { get; set; }
 
         public virtual ICollection<WorkoutPlan> WorkoutPlans { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
         public virtual Address Address { get; set; }
     }
 }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyWorkout.Dal;
 
 namespace MyWorkout.Dal.Migrations
 {
     [DbContext(typeof(MyWorkoutDbContext))]
-    partial class MyWorkoutDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210501121126_testDataSeed")]
+    partial class testDataSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,23 +69,6 @@ namespace MyWorkout.Dal.Migrations
                     b.HasIndex("ParentCategoryId");
 
                     b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Street Workout"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Gym Workout"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Cross-fitt"
-                        });
                 });
 
             modelBuilder.Entity("MyWorkout.Dal.Entities.Comment", b =>
@@ -141,57 +126,25 @@ namespace MyWorkout.Dal.Migrations
                         {
                             Id = 1,
                             Description = "karhajlítás nyújtás mint a suliban",
-                            Title = "fekvőtámasz",
-                            WorkoutPlanId = 1
+                            Title = "fekvőtámasz"
                         },
                         new
                         {
                             Id = 2,
                             Description = "karhajlítás nyújtás korláton mint a suliban",
-                            Title = "tolódzkodás",
-                            WorkoutPlanId = 1
+                            Title = "tolódzkodás"
                         },
                         new
                         {
                             Id = 3,
                             Description = "lábak hajlanak, nyúlnak",
-                            Title = "guggolás",
-                            WorkoutPlanId = 1
+                            Title = "guggolás"
                         },
                         new
                         {
                             Id = 4,
                             Description = "karhajlítás függeszkedve",
-                            Title = "húzódzkodás",
-                            WorkoutPlanId = 1
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Description = "fekvenyomás egyenes padon",
-                            Title = "fekvenyomás",
-                            WorkoutPlanId = 2
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Description = "fekvenyomás ferdepadon padon rúddal",
-                            Title = "fekvenyomás ferdepadon",
-                            WorkoutPlanId = 2
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Description = "olimpiai szakítás földről",
-                            Title = "snatch",
-                            WorkoutPlanId = 3
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Description = "traktor gumi görgetése",
-                            Title = "gumi görgetés",
-                            WorkoutPlanId = 3
+                            Title = "húzódzkodás"
                         });
                 });
 
@@ -239,26 +192,6 @@ namespace MyWorkout.Dal.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("WorkoutPlans");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoryId = 1,
-                            Description = "street workout edzés"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoryId = 2,
-                            Description = "konditermi edzés"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CategoryId = 3,
-                            Description = "cross-fitt edzés"
-                        });
                 });
 
             modelBuilder.Entity("MyWorkout.Dal.Entities.Address", b =>

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using MyWorkout.Dal;
+using MyWorkout.Dal.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +19,16 @@ namespace MyWorkout.Web.Pages
             _logger = logger;
         }
 
-        public void OnGet()
-        {
 
+        public IReadOnlyCollection<Exercise> Exercises { get; set; }
+        public IReadOnlyCollection<WorkoutPlan> WorkoutPlans { get; set; }
+        public IReadOnlyCollection<Category> Categories { get; set; }
+
+        public void OnGet([FromServices] MyWorkoutDbContext dbcontext)
+        {
+            Exercises = dbcontext.Exercises.ToList();
+            WorkoutPlans = dbcontext.WorkoutPlans.ToList();
+            Categories = dbcontext.Categories.ToList();
         }
     }
 }

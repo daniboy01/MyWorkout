@@ -97,6 +97,7 @@ namespace MyWorkout.Dal
                     new WorkoutPlan
                     {
                         Id = 1,
+                        Title = "Own Weight Challenge",
                         Description = "street workout edzés",
                         UserId = null,
                         CategoryId = 1,
@@ -104,6 +105,7 @@ namespace MyWorkout.Dal
                     new WorkoutPlan
                     {
                         Id = 2,
+                        Title = "Weight Challenge",
                         Description = "konditermi edzés",
                         UserId = null,
                         CategoryId = 2,
@@ -111,6 +113,7 @@ namespace MyWorkout.Dal
                     new WorkoutPlan
                     {
                         Id = 3,
+                        Title = "Ultimate bodyshock",
                         Description = "cross-fitt edzés",
                         UserId = null,
                         CategoryId = 3,

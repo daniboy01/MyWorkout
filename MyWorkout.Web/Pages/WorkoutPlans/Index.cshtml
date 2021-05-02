@@ -15,13 +15,8 @@
                         <a asp-page="/WorkoutPlans/Details" asp-route-id="@plan.Id">@plan.Title</a>
                     </h5>
                     <h6 class="card-subtitle">
-                        Edzés terv kreátora
+                        terv készítője
                     </h6>
-                    <div class="card-text">
-                        <p class="small">
-                            @plan.Description.Substring(0, Math.Min(300, plan.Description.Length))
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>

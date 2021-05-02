@@ -46,8 +46,9 @@ namespace MyWorkout.Web
             services.AddScoped<IRoleSeedService, RoleSeedService>();
             services.AddScoped<IUserSeedService, UserSeedService>();
 
-            services.AddScoped<WorkoutPlanService>();
-            services.AddScoped<CommentService>();
+            services.AddScoped<WorkoutPlanService>()
+                    .AddScoped<CommentService>()
+                    .AddScoped<CategoryService>();
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using MyWorkout.Bll.Dto;
+using MyWorkout.Bll.Services;
 using MyWorkout.Dal;
 using MyWorkout.Dal.Entities;
 using System;
@@ -12,15 +14,19 @@ namespace MyWorkout.Web.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
-
-        public IndexModel(ILogger<IndexModel> logger)
+        public CategoryService CategoryService { get; }
+        public List<CategoryHeader> CategoryHeaders { get; set; }
+        public IndexModel( CategoryService categoryService )
         {
-            _logger = logger;
+            CategoryService = categoryService;
         }
+        
 
-        public void OnGet([FromServices] MyWorkoutDbContext dbcontext)
+        public async Task<IActionResult> OnGet([FromServices] MyWorkoutDbContext dbcontext)
         {
+            CategoryHeaders = await CategoryService.GetCategories();
+
+            return Page();
         }
     }
 }

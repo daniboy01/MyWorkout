@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\images\category_covers\" />
     <Folder Include="wwwroot\images\workoutPlan_covers\" />
   </ItemGroup>
 

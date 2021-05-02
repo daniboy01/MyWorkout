@@ -33,6 +33,7 @@ namespace MyWorkout.Web
             services.AddRazorPages();
 
             services.AddScoped<WorkoutPlanService>();
+            services.AddScoped<CommentService>();
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }

@@ -149,6 +149,83 @@ namespace MyWorkout.Dal
                         ParentCategory = null,
                     }
                 );
+
+            modelbuilder.Entity<User>().HasData(
+                    new User
+                    {
+                        Id = 1,
+                        DisplayName = "Megverj Elek",
+                        Email = "megverjelek@example.com",
+                        AddressId = null
+                    },
+                    new User
+                    {
+                        Id = 2,
+                        DisplayName = "Egyip Tomi",
+                        Email = "egyiptomi@example.com",
+                        AddressId = null
+                    },
+                    new User
+                    {
+                        Id = 3,
+                        DisplayName = "Fütty Imre",
+                        Email = "füttyimre@example.com",
+                        AddressId = null
+                    }
+                );
+
+
+            modelbuilder.Entity<Comment>().HasData(
+                    new Comment
+                    {
+                        Id = 1,
+                        Text = "Ez aztán durva edzés terv",
+                        UserID = 1,
+                        WorkoutPlanId = 1,
+                        CreatedAt = DateTimeOffset.Now,
+                    },
+                    new Comment
+                    {
+                        Id = 2,
+                        Text = "Ez aztán durva edzés terv",
+                        UserID = 2,
+                        WorkoutPlanId = 2,
+                        CreatedAt = DateTimeOffset.Now,
+                    },
+                    new Comment
+                    {
+                        Id = 3,
+                        Text = "Ez aztán durva edzés terv",
+                        UserID = 3,
+                        WorkoutPlanId = 3,
+                        CreatedAt = DateTimeOffset.Now,
+                    },
+                    new Comment
+                    {
+                        Id = 4,
+                        Text = "Ez aztán durva edzés terv",
+                        UserID = 3,
+                        WorkoutPlanId = 1,
+                        CreatedAt = DateTimeOffset.Now,
+                    },
+                    new Comment
+                    {
+                        Id = 5,
+                        Text = "Ez aztán durva edzés terv",
+                        UserID = 2,
+                        WorkoutPlanId = 1,
+                        CreatedAt = DateTimeOffset.Now,
+                    },
+                    new Comment
+                    {
+                        Id = 6,
+                        Text = "Ez aztán durva edzés terv",
+                        UserID = 1,
+                        WorkoutPlanId = 1,
+                        CreatedAt = DateTimeOffset.Now,
+                    }
+
+                );
         }
     }
 

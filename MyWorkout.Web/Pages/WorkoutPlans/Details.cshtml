@@ -7,10 +7,16 @@
     <div class="row">
         <div class="col-md-3">
             <img class="w-100 mb-2" src="~/images/workoutPlan_covers/@(Model.Id).jpg" />
-            @foreach(var exercise in Model.WorkoutPlan.Exercises)
-            {
-                <p>@exercise.Title</p>
-            }
+        </div>
+        <div class="col-md-3">
+            <ul class="list-group">
+                @foreach (var exercise in Model.WorkoutPlan.Exercises)
+                {
+                <li class="list-group-item">
+                    @exercise.Title
+                </li>
+                }
+            </ul>
         </div>
     </div>
 

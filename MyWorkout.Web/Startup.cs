@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MyWorkout.Bll.Services;
+using MyWorkout.Bll.Settings;
 using MyWorkout.Dal;
 using MyWorkout.Dal.Entities;
 using MyWorkout.Dal.SeedInterfaces;
@@ -48,6 +50,10 @@ namespace MyWorkout.Web
             services.AddScoped<CommentService>();
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+
+            services.AddTransient<IEmailSender, EmailSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

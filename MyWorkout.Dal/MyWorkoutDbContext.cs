@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MyWorkout.Dal.Entities;
 using System;
 using System.Collections.Generic;
@@ -6,7 +8,7 @@ using System.Text;
 
 namespace MyWorkout.Dal
 {
-    public class MyWorkoutDbContext : DbContext
+    public class MyWorkoutDbContext : IdentityDbContext<User, IdentityRole<int>, int>
     {
         public MyWorkoutDbContext( DbContextOptions options ) : base( options )
         {
@@ -16,12 +18,13 @@ namespace MyWorkout.Dal
         public DbSet<WorkoutPlan> WorkoutPlans { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Address> Addresses { get; set; }
-        public DbSet<User> Users { get; set; }
         public DbSet<Comment> Comments { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
+            base.OnModelCreating( modelbuilder );
+
             modelbuilder.Entity<Exercise>().HasData(
                     //street workout gyakorlatok
                     new Exercise
@@ -226,6 +229,13 @@ namespace MyWorkout.Dal
                     }
 
                 );
+
+            modelbuilder.Entity<User>(entity =>
+                {
+                    entity.ToTable("Users");
+                    entity.Property(e => e.DisplayName).IsRequired().HasMaxLength(100);
+                }
+            );
         }
     }
 

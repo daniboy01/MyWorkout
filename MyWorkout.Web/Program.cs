@@ -13,11 +13,11 @@ namespace MyWorkout.Web
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public async static Task Main(string[] args)
         {
-            CreateHostBuilder(args)
+            (await CreateHostBuilder(args)
                 .Build()
-                .MigrateDataBase<MyWorkoutDbContext>()
+                .MigrateDataBaseAsync<MyWorkoutDbContext>())
                 .Run();
         }
 

@@ -1,11 +1,15 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MyWorkout.Bll.Services;
 using MyWorkout.Dal;
+using MyWorkout.Dal.Entities;
+using MyWorkout.Dal.SeedInterfaces;
+using MyWorkout.Dal.SeedService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +36,14 @@ namespace MyWorkout.Web
 
             services.AddRazorPages();
 
+
+            services.AddIdentity<User, IdentityRole<int>>()
+                .AddEntityFrameworkStores<MyWorkoutDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.AddScoped<IRoleSeedService, RoleSeedService>();
+            services.AddScoped<IUserSeedService, UserSeedService>();
+
             services.AddScoped<WorkoutPlanService>();
             services.AddScoped<CommentService>();
 
@@ -53,6 +65,8 @@ namespace MyWorkout.Web
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

@@ -23,10 +23,11 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
 
         public WorkoutPlan WorkoutPlan { get; set; }
 
-        public void OnGet()
+        public async Task<IActionResult> OnGet()
         {
-            WorkoutPlan = WorkoutPlanService.GetByIdAsync(Id);
-            int a = 2;
+            WorkoutPlan = await WorkoutPlanService.GetByIdAsync(Id);
+
+            return Page();
         }
     }
 }

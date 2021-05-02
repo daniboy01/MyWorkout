@@ -18,9 +18,9 @@ namespace MyWorkout.Bll.Services
             DbContext = dbContext;
         }
 
-        public WorkoutPlan GetByIdAsync(int id)
+        public async Task<WorkoutPlan> GetByIdAsync(int id)
         {
-            var entity = DbContext.WorkoutPlans.Include(w => w.Exercises).Where(w => w.Id == id).First();
+            var entity = await DbContext.WorkoutPlans.Include(w => w.Exercises).Where(w => w.Id == id).FirstAsync();
 
             return entity;
         }

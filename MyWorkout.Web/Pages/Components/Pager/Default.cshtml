@@ -1,0 +1,55 @@
+﻿@model MyWorkout.Web.ViewComponents.PagerViewComponent.PagerSpecification
+
+
+
+@if (Model.TotalPages > 1)
+{
+    <nav>
+        <ul class="pagination justify-content-center">
+            @if (Model.PageNumber > 1)
+            {
+                <li class="page-item">
+                    <a asp-route-pageNumber="1" class="page-link">
+                        <span>&laquo;</span>
+                    </a>
+                </li>
+            }
+
+            @for (var pageNumber = Math.Max(1, Model.PageNumber - Model.PagesToShow);
+              pageNumber < Math.Min(Model.TotalPages, Model.PageNumber + Model.PagesToShow);
+              pageNumber++)
+            {
+                if (Model.PageNumber == pageNumber)
+                {
+                    <li class="page-item active">
+                        <a class="page-link">
+                            @pageNumber
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <a asp-route-pageNumber="@pageNumber" class="page-link">
+                            @pageNumber
+                        </a>
+                    </li>
+                }
+
+            }
+
+
+            @if (Model.PageNumber < Model.TotalPages)
+            {
+                <li class="page-item">
+                    <a asp-route-pageNumber="1" class="page-link">
+                        <span>&raquo;</span>
+                    </a>
+                </li>
+            }
+        </ul>
+    </nav>
+
+}
+
+

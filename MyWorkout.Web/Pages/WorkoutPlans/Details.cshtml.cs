@@ -26,11 +26,13 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
 
         public WorkoutPlan WorkoutPlan { get; set; }
         public List<CommentDto> Comments { get; set; }
+        public List<ExerciseDto> Exercises { get; set; }
 
         public async Task<IActionResult> OnGet()
         {
             WorkoutPlan = await WorkoutPlanService.GetByIdAsync(Id);
             Comments = await CommentService.GetComments(Id);
+            Exercises = await WorkoutPlanService.GetExercisesFromWorkoutPlan(Id);
 
             return Page();
         }

@@ -1,10 +1,19 @@
 ﻿@page "/Workouts"
 @model MyWorkout.Web.Pages.WorkoutPlans.IndexModel
-@{
-}
+
 
 <div class="row">
-    @foreach (var plan in Model.WorkoutPlans)
+    <div>
+        @Model.WorkoutPlans.AllResultsCount found
+    </div>
+
+    <vc:pager page-size="@Model.WorkoutPlans.PageSize"
+              page-number="@Model.WorkoutPlans.PageNumber"
+              all-results-count="@Model.WorkoutPlans.AllResultsCount"
+              pages-to-show="3">
+    </vc:pager>
+
+    @foreach (var plan in Model.WorkoutPlans.Results)
     {
         <div class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex">
             <div class="card">

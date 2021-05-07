@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyWorkout.Dal;
 
 namespace MyWorkout.Dal.Migrations
 {
     [DbContext(typeof(MyWorkoutDbContext))]
-    partial class MyWorkoutDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210507153628_addWorkoutExerciseTable")]
+    partial class addWorkoutExerciseTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -247,7 +249,7 @@ namespace MyWorkout.Dal.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 7, 18, 4, 48, 370, DateTimeKind.Unspecified).AddTicks(6791), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 7, 17, 36, 28, 286, DateTimeKind.Unspecified).AddTicks(5859), new TimeSpan(0, 2, 0, 0, 0)),
                             Text = "Ez aztán durva edzés terv",
                             UserID = 1,
                             WorkoutPlanId = 1
@@ -255,7 +257,7 @@ namespace MyWorkout.Dal.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 7, 18, 4, 48, 374, DateTimeKind.Unspecified).AddTicks(4853), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 7, 17, 36, 28, 290, DateTimeKind.Unspecified).AddTicks(1066), new TimeSpan(0, 2, 0, 0, 0)),
                             Text = "Ez aztán durva edzés terv",
                             UserID = 2,
                             WorkoutPlanId = 2
@@ -263,7 +265,7 @@ namespace MyWorkout.Dal.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 7, 18, 4, 48, 374, DateTimeKind.Unspecified).AddTicks(4906), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 7, 17, 36, 28, 290, DateTimeKind.Unspecified).AddTicks(1117), new TimeSpan(0, 2, 0, 0, 0)),
                             Text = "Ez aztán durva edzés terv",
                             UserID = 3,
                             WorkoutPlanId = 3
@@ -271,7 +273,7 @@ namespace MyWorkout.Dal.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 7, 18, 4, 48, 374, DateTimeKind.Unspecified).AddTicks(4916), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 7, 17, 36, 28, 290, DateTimeKind.Unspecified).AddTicks(1127), new TimeSpan(0, 2, 0, 0, 0)),
                             Text = "Ez aztán durva edzés terv",
                             UserID = 3,
                             WorkoutPlanId = 1
@@ -279,7 +281,7 @@ namespace MyWorkout.Dal.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 7, 18, 4, 48, 374, DateTimeKind.Unspecified).AddTicks(4924), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 7, 17, 36, 28, 290, DateTimeKind.Unspecified).AddTicks(1135), new TimeSpan(0, 2, 0, 0, 0)),
                             Text = "Ez aztán durva edzés terv",
                             UserID = 2,
                             WorkoutPlanId = 1
@@ -287,7 +289,7 @@ namespace MyWorkout.Dal.Migrations
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 7, 18, 4, 48, 374, DateTimeKind.Unspecified).AddTicks(4931), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 7, 17, 36, 28, 290, DateTimeKind.Unspecified).AddTicks(1143), new TimeSpan(0, 2, 0, 0, 0)),
                             Text = "Ez aztán durva edzés terv",
                             UserID = 1,
                             WorkoutPlanId = 1
@@ -441,7 +443,7 @@ namespace MyWorkout.Dal.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "013e015f-68f9-414c-8bc0-10233c7a3e3e",
+                            ConcurrencyStamp = "b73452c4-b99b-45a0-8a9a-66532170b8a1",
                             DisplayName = "Megverj Elek",
                             Email = "megverjelek@example.com",
                             EmailConfirmed = false,
@@ -453,7 +455,7 @@ namespace MyWorkout.Dal.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c41edf27-ee7a-47d4-b9d2-38413609e666",
+                            ConcurrencyStamp = "713cce00-5649-4829-abda-030a3de6667a",
                             DisplayName = "Egyip Tomi",
                             Email = "egyiptomi@example.com",
                             EmailConfirmed = false,
@@ -465,7 +467,7 @@ namespace MyWorkout.Dal.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "936eb90c-1e8b-4447-9bda-2b8dfc307c16",
+                            ConcurrencyStamp = "183c5283-61ba-49b9-8776-a320674d753c",
                             DisplayName = "Fütty Imre",
                             Email = "füttyimre@example.com",
                             EmailConfirmed = false,
@@ -499,56 +501,6 @@ namespace MyWorkout.Dal.Migrations
                         {
                             ExerciseId = 2,
                             WorkoutPlanId = 2
-                        },
-                        new
-                        {
-                            ExerciseId = 4,
-                            WorkoutPlanId = 3
-                        },
-                        new
-                        {
-                            ExerciseId = 5,
-                            WorkoutPlanId = 1
-                        },
-                        new
-                        {
-                            ExerciseId = 6,
-                            WorkoutPlanId = 2
-                        },
-                        new
-                        {
-                            ExerciseId = 7,
-                            WorkoutPlanId = 3
-                        },
-                        new
-                        {
-                            ExerciseId = 8,
-                            WorkoutPlanId = 1
-                        },
-                        new
-                        {
-                            ExerciseId = 1,
-                            WorkoutPlanId = 2
-                        },
-                        new
-                        {
-                            ExerciseId = 2,
-                            WorkoutPlanId = 3
-                        },
-                        new
-                        {
-                            ExerciseId = 3,
-                            WorkoutPlanId = 1
-                        },
-                        new
-                        {
-                            ExerciseId = 4,
-                            WorkoutPlanId = 2
-                        },
-                        new
-                        {
-                            ExerciseId = 5,
-                            WorkoutPlanId = 3
                         });
                 });
 

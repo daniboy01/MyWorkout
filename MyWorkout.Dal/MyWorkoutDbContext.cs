@@ -19,11 +19,28 @@ namespace MyWorkout.Dal
         public DbSet<Category> Categories { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<WorkoutExercise> WorkoutExercises { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.EnableSensitiveDataLogging();
+        }
 
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
             base.OnModelCreating( modelbuilder );
+
+            modelbuilder.Entity<WorkoutExercise>()
+                .HasKey(we => new { we.ExerciseId, we.WorkoutPlanId });
+            modelbuilder.Entity<WorkoutExercise>()
+                .HasOne(we => we.WorkoutPlan)
+                .WithMany(w => w.WorkoutExercise)
+                .HasForeignKey(we => we.WorkoutPlanId);
+            modelbuilder.Entity<WorkoutExercise>()
+                .HasOne(we => we.Exercise)
+                .WithMany(w => w.WorkoutExercise)
+                .HasForeignKey(we => we.ExerciseId);
+
 
             modelbuilder.Entity<Exercise>().HasData(
                     //street workout gyakorlatok
@@ -32,32 +49,24 @@ namespace MyWorkout.Dal
                         Id = 1,
                         Title = "fekvőtámasz",
                         Description = "karhajlítás nyújtás mint a suliban",
-                        WorkoutPlanId = 1,
-                        WorkoutPlan = null
                     },
                     new Exercise
                     {
                         Id = 2,
                         Title = "tolódzkodás",
                         Description = "karhajlítás nyújtás korláton mint a suliban",
-                        WorkoutPlanId = 1,
-                        WorkoutPlan = null
                     },
                     new Exercise
                     {
                         Id = 3,
                         Title = "guggolás",
                         Description = "lábak hajlanak, nyúlnak",
-                        WorkoutPlanId = 1,
-                        WorkoutPlan = null
                     },
                     new Exercise
                     {
                         Id = 4,
                         Title = "húzódzkodás",
                         Description = "karhajlítás függeszkedve",
-                        WorkoutPlanId = 1,
-                        WorkoutPlan = null
                     },
                     //kondis gyakorlatok
                     new Exercise
@@ -65,16 +74,12 @@ namespace MyWorkout.Dal
                         Id = 5,
                         Title = "fekvenyomás",
                         Description = "fekvenyomás egyenes padon",
-                        WorkoutPlanId = 2,
-                        WorkoutPlan = null
                     },
                      new Exercise
                      {
                          Id = 6,
                          Title = "fekvenyomás ferdepadon",
                          Description = "fekvenyomás ferdepadon padon rúddal",
-                         WorkoutPlanId = 2,
-                         WorkoutPlan = null
                      },
 
                      //cross-fitt gyakorlatok
@@ -83,16 +88,12 @@ namespace MyWorkout.Dal
                         Id = 7,
                         Title = "snatch",
                         Description = "olimpiai szakítás földről",
-                        WorkoutPlanId = 3,
-                        WorkoutPlan = null
                     },
                      new Exercise
                      {
                          Id = 8,
                          Title = "gumi görgetés",
                          Description = "traktor gumi görgetése",
-                         WorkoutPlanId = 3,
-                         WorkoutPlan = null
                      }
                 );
 
@@ -130,6 +131,21 @@ namespace MyWorkout.Dal
                         UserId = null,
                         CategoryId = 3,
                     }
+                );
+
+            modelbuilder.Entity<WorkoutExercise>().HasData(
+                new WorkoutExercise { ExerciseId = 1, WorkoutPlanId = 1 },
+                new WorkoutExercise { ExerciseId = 2, WorkoutPlanId = 2 },
+                new WorkoutExercise { ExerciseId = 4, WorkoutPlanId = 3 },
+                new WorkoutExercise { ExerciseId = 5, WorkoutPlanId = 1 },
+                new WorkoutExercise { ExerciseId = 6, WorkoutPlanId = 2 },
+                new WorkoutExercise { ExerciseId = 7, WorkoutPlanId = 3 },
+                new WorkoutExercise { ExerciseId = 8, WorkoutPlanId = 1 },
+                new WorkoutExercise { ExerciseId = 1, WorkoutPlanId = 2 },
+                new WorkoutExercise { ExerciseId = 2, WorkoutPlanId = 3 },
+                new WorkoutExercise { ExerciseId = 3, WorkoutPlanId = 1 },
+                new WorkoutExercise { ExerciseId = 4, WorkoutPlanId = 2 },
+                new WorkoutExercise { ExerciseId = 5, WorkoutPlanId = 3 }
                 );
 
             modelbuilder.Entity<Category>().HasData(

@@ -31,10 +31,11 @@ namespace MyWorkout.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<MyWorkoutDbContext>(
-                    o => o.UseSqlServer(Configuration.GetConnectionString(nameof(MyWorkoutDbContext))
-                    )
-                );
+            services.AddDbContext<MyWorkoutDbContext>(o =>
+                {
+                    o.UseSqlServer(Configuration.GetConnectionString(nameof(MyWorkoutDbContext)));
+                    o.EnableSensitiveDataLogging(true);
+                }); 
 
             services.AddRazorPages();
 
@@ -48,7 +49,8 @@ namespace MyWorkout.Web
 
             services.AddScoped<WorkoutPlanService>()
                     .AddScoped<CommentService>()
-                    .AddScoped<CategoryService>();
+                    .AddScoped<CategoryService>()
+                    .AddScoped<ExerciseService>();
 
 
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));

@@ -12,19 +12,26 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
     public class AddWorkoutModel : PageModel
     {
         private readonly WorkoutPlanService workoutPlanService;
+        private readonly ExerciseService exerciseService;
 
-        public AddWorkoutModel( WorkoutPlanService workoutPlanService )
+        public AddWorkoutModel( WorkoutPlanService workoutPlanService, ExerciseService exerciseService )
         {
             this.workoutPlanService = workoutPlanService;
-        }
-
-        public void OnGet()
-        {
-
+            this.exerciseService = exerciseService;
         }
 
         [BindProperty]
         public WorkoutPlanDto WorkoutPlan { get; set; }
+        [BindProperty]
+        public int[] ExerciseIds { get; set; }
+
+        public IEnumerable<ExerciseDto> Exercises { get; set; }
+
+        public void OnGet()
+        {
+            Exercises = exerciseService.GetAllExerciseAsync();
+        }
+
 
         public async Task<IActionResult> OnPostAsync()
         {

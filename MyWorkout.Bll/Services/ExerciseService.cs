@@ -1,7 +1,9 @@
-﻿using MyWorkout.Bll.Dto;
+﻿using Microsoft.EntityFrameworkCore;
+using MyWorkout.Bll.Dto;
 using MyWorkout.Dal;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,9 +17,17 @@ namespace MyWorkout.Bll.Services
             DbContext = dbContext;
         }
 
-        public async Task<IEnumerable<ExerciseDto>> GetAllExerciseAsync()
+        public IEnumerable<ExerciseDto> GetAllExerciseAsync()
         {
-            var exercise = DbContext.Exercises.
+            var exercises =   DbContext.Exercises.Select(e => new ExerciseDto 
+            {
+                Id = e.Id,
+                Title = e.Title,
+                Description = e.Description
+            }
+            ).ToList();
+
+            return exercises;
         }
     }
 }

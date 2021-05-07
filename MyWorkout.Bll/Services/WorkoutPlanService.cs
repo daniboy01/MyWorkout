@@ -22,20 +22,26 @@ namespace MyWorkout.Bll.Services
 
         public async Task<WorkoutPlan> GetByIdAsync(int id)
         {
-            var entity = await DbContext.WorkoutPlans.Include(w => w.Exercises).Where(w => w.Id == id).FirstAsync();
+            var entity = await DbContext.WorkoutPlans.Include(w => w.WorkoutExercise).Where(w => w.Id == id).FirstAsync();
 
             return entity;
         }
 
         public async Task<List<ExerciseDto>> GetExercisesFromWorkoutPlan(int workoutId)
         {
+            //TODO ne mindet töltsem be, szűrni kell
+            var allExercise = DbContext.Exercises.ToList();
+
             var workout = await DbContext.WorkoutPlans.FirstAsync(w => w.Id == workoutId);
-            var exercises = workout.Exercises.Select(e => new ExerciseDto
+
+            var exerciseLIst = workout.WorkoutExercise;
+
+            var exercises = workout.WorkoutExercise.Select(e => new ExerciseDto
             {
-                Id = e.Id,
-                Title = e.Title,
-                Description = e.Description,
-                WorkoutPlanId = e.WorkoutPlanId
+                Id = e.ExerciseId,
+                Title = e.Exercise.Title,
+                Description = e.Exercise.Description,
+                WorkoutPlanId = workoutId
             }).ToList();
 
             return exercises;

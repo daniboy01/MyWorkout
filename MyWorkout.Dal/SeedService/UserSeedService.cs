@@ -50,6 +50,7 @@ namespace MyWorkout.Dal.SeedService
 
                 if (!createResult_user.Succeeded || !addToroleResult_user.Succeeded)
                     throw new ApplicationException("Aministrator could not be created!");
+
             }
         }
     }

@@ -247,7 +247,7 @@ namespace MyWorkout.Dal.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 7, 11, 27, 52, 478, DateTimeKind.Unspecified).AddTicks(9342), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 7, 12, 13, 55, 997, DateTimeKind.Unspecified).AddTicks(5449), new TimeSpan(0, 2, 0, 0, 0)),
                             Text = "Ez aztán durva edzés terv",
                             UserID = 1,
                             WorkoutPlanId = 1
@@ -255,7 +255,7 @@ namespace MyWorkout.Dal.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 7, 11, 27, 52, 482, DateTimeKind.Unspecified).AddTicks(7969), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 7, 12, 13, 56, 1, DateTimeKind.Unspecified).AddTicks(2816), new TimeSpan(0, 2, 0, 0, 0)),
                             Text = "Ez aztán durva edzés terv",
                             UserID = 2,
                             WorkoutPlanId = 2
@@ -263,7 +263,7 @@ namespace MyWorkout.Dal.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 7, 11, 27, 52, 482, DateTimeKind.Unspecified).AddTicks(8021), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 7, 12, 13, 56, 1, DateTimeKind.Unspecified).AddTicks(2879), new TimeSpan(0, 2, 0, 0, 0)),
                             Text = "Ez aztán durva edzés terv",
                             UserID = 3,
                             WorkoutPlanId = 3
@@ -271,7 +271,7 @@ namespace MyWorkout.Dal.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 7, 11, 27, 52, 482, DateTimeKind.Unspecified).AddTicks(8030), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 7, 12, 13, 56, 1, DateTimeKind.Unspecified).AddTicks(2890), new TimeSpan(0, 2, 0, 0, 0)),
                             Text = "Ez aztán durva edzés terv",
                             UserID = 3,
                             WorkoutPlanId = 1
@@ -279,7 +279,7 @@ namespace MyWorkout.Dal.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 7, 11, 27, 52, 482, DateTimeKind.Unspecified).AddTicks(8125), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 7, 12, 13, 56, 1, DateTimeKind.Unspecified).AddTicks(2897), new TimeSpan(0, 2, 0, 0, 0)),
                             Text = "Ez aztán durva edzés terv",
                             UserID = 2,
                             WorkoutPlanId = 1
@@ -287,7 +287,7 @@ namespace MyWorkout.Dal.Migrations
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 7, 11, 27, 52, 482, DateTimeKind.Unspecified).AddTicks(8133), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 7, 12, 13, 56, 1, DateTimeKind.Unspecified).AddTicks(2904), new TimeSpan(0, 2, 0, 0, 0)),
                             Text = "Ez aztán durva edzés terv",
                             UserID = 1,
                             WorkoutPlanId = 1
@@ -454,7 +454,7 @@ namespace MyWorkout.Dal.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "79746af7-fb50-41eb-a18d-a46690067ff2",
+                            ConcurrencyStamp = "c72167bf-b3ff-49de-9326-579756f335a0",
                             DisplayName = "Megverj Elek",
                             Email = "megverjelek@example.com",
                             EmailConfirmed = false,
@@ -466,7 +466,7 @@ namespace MyWorkout.Dal.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6879c4a5-140d-43a3-b401-ad5d001564f4",
+                            ConcurrencyStamp = "ecf33d97-c227-4728-86a7-38d413bed3af",
                             DisplayName = "Egyip Tomi",
                             Email = "egyiptomi@example.com",
                             EmailConfirmed = false,
@@ -478,7 +478,7 @@ namespace MyWorkout.Dal.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f743814f-f1ce-411e-816c-39f0eece1717",
+                            ConcurrencyStamp = "11180b50-7c6e-47a1-9892-be13d28ad783",
                             DisplayName = "Fütty Imre",
                             Email = "füttyimre@example.com",
                             EmailConfirmed = false,

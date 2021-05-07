@@ -23,11 +23,13 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
 
         }
 
+        [BindProperty]
         public WorkoutPlanDto WorkoutPlan { get; set; }
 
-        public async Task OnPostAsync()
+        public async Task<IActionResult> OnPostAsync()
         {
             await workoutPlanService.AddNewWorkoutAsync(WorkoutPlan);
+            return new RedirectToPageResult("/WorkoutPlans/Index");
         }
     }
 }

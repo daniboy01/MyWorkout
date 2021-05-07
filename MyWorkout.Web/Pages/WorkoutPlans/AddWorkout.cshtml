@@ -5,9 +5,17 @@
 <h1>Add new workout</h1>
 
 <div class="row">
+
+    <div class="col">
+        @foreach(var exercise in Model.Exercises)
+        {
+            <a>@exercise.Title</a>
+        }
+    </div>
+
+
     <form method="post" role="form">
         <div class="col">
-
             <div class="form-group">
                 <label asp-for="WorkoutPlan.Title"></label>
                 <input class="form-control" asp-for="WorkoutPlan.Title" required />
@@ -19,5 +27,5 @@
             <button type="submit">Add</button>
 
         </div>
-        </form>
+    </form>
 </div>

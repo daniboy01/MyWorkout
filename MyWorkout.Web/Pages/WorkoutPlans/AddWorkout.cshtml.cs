@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyWorkout.Bll.Dto;
 using MyWorkout.Bll.Services;
+using MyWorkout.Web.Helpers;
+using MyWorkout.Web.Models;
 
 namespace MyWorkout.Web.Pages.WorkoutPlans
 {
@@ -23,7 +25,7 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
         [BindProperty]
         public WorkoutPlanDto WorkoutPlan { get; set; }
         [BindProperty]
-        public int[] ExerciseIds { get; set; }
+        public int ChoosenExerciseId { get; set; }
 
         public IEnumerable<ExerciseDto> Exercises { get; set; }
 
@@ -37,6 +39,18 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
         {
             await workoutPlanService.AddNewWorkoutAsync(WorkoutPlan);
             return new RedirectToPageResult("/WorkoutPlans/Index");
+        }
+
+        public void AddToWorkout(int id)
+        {
+            //var exercises = HttpContext.Session.Get<List<ExerciseModel>>("Execises");
+            //if (exercises == null)
+            //    exercises = new List<ExerciseModel>();
+
+            var exercise = new ExerciseModel
+            {
+                Id = id
+            };
         }
     }
 }

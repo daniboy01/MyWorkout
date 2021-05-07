@@ -2,12 +2,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using MyWorkout.Dal;
+using MyWorkout.Web.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MyWorkout.Web.Hosting;
-using MyWorkout.Dal;
 
 namespace MyWorkout.Web
 {

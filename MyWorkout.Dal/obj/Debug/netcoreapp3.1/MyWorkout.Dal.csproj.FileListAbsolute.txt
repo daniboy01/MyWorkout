@@ -1,0 +1,18 @@
+C:\Users\Daniel\source\repos\MyWorkout.Web\MyWorkout.Dal\bin\Debug\netcoreapp3.1\MyWorkout.Dal.deps.json
+C:\Users\Daniel\source\repos\MyWorkout.Web\MyWorkout.Dal\bin\Debug\netcoreapp3.1\MyWorkout.Dal.dll
+C:\Users\Daniel\source\repos\MyWorkout.Web\MyWorkout.Dal\bin\Debug\netcoreapp3.1\MyWorkout.Dal.pdb
+C:\Users\Daniel\source\repos\MyWorkout.Web\MyWorkout.Dal\obj\Debug\netcoreapp3.1\MyWorkout.Dal.AssemblyInfoInputs.cache
+C:\Users\Daniel\source\repos\MyWorkout.Web\MyWorkout.Dal\obj\Debug\netcoreapp3.1\MyWorkout.Dal.AssemblyInfo.cs
+C:\Users\Daniel\source\repos\MyWorkout.Web\MyWorkout.Dal\obj\Debug\netcoreapp3.1\MyWorkout.Dal.csproj.CoreCompileInputs.cache
+C:\Users\Daniel\source\repos\MyWorkout.Web\MyWorkout.Dal\obj\Debug\netcoreapp3.1\MyWorkout.Dal.dll
+C:\Users\Daniel\source\repos\MyWorkout.Web\MyWorkout.Dal\obj\Debug\netcoreapp3.1\MyWorkout.Dal.pdb
+C:\Users\Daniel\source\repos\MyWorkout.Web\MyWorkout.Dal\obj\Debug\netcoreapp3.1\MyWorkout.Dal.csprojAssemblyReference.cache
+D:\BME_Laborok_előadások\Specializációs tárgyak\Webportál_fejlesztés\MyWorkout\MyWorkout.Dal\bin\Debug\netcoreapp3.1\MyWorkout.Dal.deps.json
+D:\BME_Laborok_előadások\Specializációs tárgyak\Webportál_fejlesztés\MyWorkout\MyWorkout.Dal\bin\Debug\netcoreapp3.1\MyWorkout.Dal.dll
+D:\BME_Laborok_előadások\Specializációs tárgyak\Webportál_fejlesztés\MyWorkout\MyWorkout.Dal\bin\Debug\netcoreapp3.1\MyWorkout.Dal.pdb
+D:\BME_Laborok_előadások\Specializációs tárgyak\Webportál_fejlesztés\MyWorkout\MyWorkout.Dal\obj\Debug\netcoreapp3.1\MyWorkout.Dal.csprojAssemblyReference.cache
+D:\BME_Laborok_előadások\Specializációs tárgyak\Webportál_fejlesztés\MyWorkout\MyWorkout.Dal\obj\Debug\netcoreapp3.1\MyWorkout.Dal.AssemblyInfoInputs.cache
+D:\BME_Laborok_előadások\Specializációs tárgyak\Webportál_fejlesztés\MyWorkout\MyWorkout.Dal\obj\Debug\netcoreapp3.1\MyWorkout.Dal.AssemblyInfo.cs
+D:\BME_Laborok_előadások\Specializációs tárgyak\Webportál_fejlesztés\MyWorkout\MyWorkout.Dal\obj\Debug\netcoreapp3.1\MyWorkout.Dal.csproj.CoreCompileInputs.cache
+D:\BME_Laborok_előadások\Specializációs tárgyak\Webportál_fejlesztés\MyWorkout\MyWorkout.Dal\obj\Debug\netcoreapp3.1\MyWorkout.Dal.dll
+D:\BME_Laborok_előadások\Specializációs tárgyak\Webportál_fejlesztés\MyWorkout\MyWorkout.Dal\obj\Debug\netcoreapp3.1\MyWorkout.Dal.pdb

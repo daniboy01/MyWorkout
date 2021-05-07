@@ -32,7 +32,7 @@ namespace MyWorkout.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<MyWorkoutDbContext>(
-                    o => o.UseSqlServer( Configuration.GetConnectionString( nameof(MyWorkoutDbContext) )
+                    o => o.UseSqlServer(Configuration.GetConnectionString(nameof(MyWorkoutDbContext))
                     )
                 );
 
@@ -50,11 +50,11 @@ namespace MyWorkout.Web
                     .AddScoped<CommentService>()
                     .AddScoped<CategoryService>();
 
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
 
             services.AddTransient<IEmailSender, EmailSender>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,14 +73,11 @@ namespace MyWorkout.Web
 
             app.UseRouting();
 
-            app.UseAuthentication();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
-                endpoints.MapControllers();
             });
         }
     }

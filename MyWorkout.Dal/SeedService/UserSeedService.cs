@@ -22,7 +22,7 @@ namespace MyWorkout.Dal.SeedService
         {
             if ( !(await userManager.GetUsersInRoleAsync(Roles.Adminnistrator)).Any())
             {
-                var user = new User
+                var admin = new User
                 {
                     Email = "admin@myworkout.hu",
                     DisplayName = "Adminisztrátor Aladár",
@@ -30,10 +30,25 @@ namespace MyWorkout.Dal.SeedService
                     UserName = "admin"
                 };
 
-                var createResult = await userManager.CreateAsync(user, "$Admin123");
-                var addToroleResult = await userManager.AddToRoleAsync(user, Roles.Adminnistrator);
+                var user = new User
+                {
+                    Email = "user@myworkout.hu",
+                    DisplayName = "User István",
+                    SecurityStamp = Guid.NewGuid().ToString(),
+                    UserName = "user"
+                };
 
-                if (!createResult.Succeeded || !addToroleResult.Succeeded)
+                var createResult_admin = await userManager.CreateAsync(admin, "$Admin123");
+                var addToroleResult_admin = await userManager.AddToRoleAsync(admin, Roles.Adminnistrator);
+
+                var createResult_user = await userManager.CreateAsync(user, "$Password123");
+                var addToroleResult_user = await userManager.AddToRoleAsync(user, Roles.User);
+
+                if (!createResult_admin.Succeeded || !addToroleResult_admin.Succeeded)
+                    throw new ApplicationException("Aministrator could not be created!");
+
+
+                if (!createResult_user.Succeeded || !addToroleResult_user.Succeeded)
                     throw new ApplicationException("Aministrator could not be created!");
             }
         }

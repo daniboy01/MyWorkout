@@ -44,6 +44,14 @@ namespace MyWorkout.Web
                 .AddEntityFrameworkStores<MyWorkoutDbContext>()
                 .AddDefaultTokenProviders();
 
+
+            services.AddDistributedMemoryCache();
+            services.AddSession(o =>
+            {
+                o.Cookie.HttpOnly = true;
+                o.Cookie.IsEssential = true;
+            });
+
             services.AddScoped<IRoleSeedService, RoleSeedService>();
             services.AddScoped<IUserSeedService, UserSeedService>();
 
@@ -76,6 +84,8 @@ namespace MyWorkout.Web
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

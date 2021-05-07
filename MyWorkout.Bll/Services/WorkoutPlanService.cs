@@ -94,5 +94,21 @@ namespace MyWorkout.Bll.Services
                 Results = workouts
             };
         }
+
+        public async Task<WorkoutPlanDto> AddNewWorkoutAsync(WorkoutPlanDto dto)
+        {
+            var workoutToSave = new WorkoutPlan
+            {
+                Title = dto.Title,
+                Description = dto.Description,
+            };
+
+            await DbContext.WorkoutPlans.AddAsync(workoutToSave);
+            DbContext.SaveChanges();
+
+            dto.Id = workoutToSave.Id;
+
+            return dto;
+        }
     }
 }

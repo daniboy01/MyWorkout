@@ -23,11 +23,10 @@
                         </li>
                     </ul>
 
-                    @if (User.IsInRole("User"))
+                    @if (User.IsInRole("Administrator"))
                     {
                         <li>
                             <a class="nav-link text-dark" asp-area="" asp-page="/WorkoutPlans/AddWorkout">Add new workout</a>
-
                         </li>
 
                     }

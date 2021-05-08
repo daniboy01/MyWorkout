@@ -50,6 +50,24 @@ namespace MyWorkout.Bll.Services
             return exercises;
         }
 
+        public void CreateNewComment(CommentDto newComment)
+        {
+            var workout = DbContext.WorkoutPlans.Where(w => w.Id == newComment.WorkoutId).FirstOrDefault();
+            var commentToSave = new Comment
+            {
+                Text = newComment.Text,
+                UserID = newComment.UserId,
+                WorkoutPlanId = newComment.WorkoutId,
+                CreatedAt = DateTime.Now,
+
+            };
+            //workout.Comments.Add(commentToSave);
+            commentToSave.WorkoutPlan = workout;
+
+            DbContext.Comments.Add(commentToSave);
+            DbContext.SaveChanges();
+        }
+
         public void EditWorkout(WorkoutPlan workoutPlan, int[] selectedExercises, int categoryId)
         {
             WorkoutPlan workoutPlantoEdit = DbContext.WorkoutPlans.Where(w => w.Id == workoutPlan.Id).FirstOrDefault();

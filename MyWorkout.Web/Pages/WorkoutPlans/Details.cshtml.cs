@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -24,6 +25,9 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
         [BindProperty(SupportsGet = true)]
         public int Id { get; set; }
 
+        [BindProperty]
+        public CommentDto NewComment { get; set; }
+
         public WorkoutPlan WorkoutPlan { get; set; }
         public List<CommentDto> Comments { get; set; }
         public List<ExerciseDto> Exercises { get; set; }
@@ -33,7 +37,26 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
             WorkoutPlan = await WorkoutPlanService.GetByIdAsync(Id);
             Comments = await CommentService.GetComments(Id);
             Exercises = await WorkoutPlanService.GetExercisesFromWorkoutPlan(Id);
+            NewComment = new CommentDto { WorkoutId = Id };
 
+            return Page();
+        }
+
+        public IActionResult OnPostCreateComment()
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    NewComment.UserId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                    WorkoutPlanService.CreateNewComment(NewComment);
+                    return RedirectToPage("/WorkoutPlans/Details", new { Id = NewComment.WorkoutId });
+                }
+                catch( Exception ex)
+                {
+                    ModelState.AddModelError("", "Hiba a comment létrehozásakor");
+                }
+            }
             return Page();
         }
     }

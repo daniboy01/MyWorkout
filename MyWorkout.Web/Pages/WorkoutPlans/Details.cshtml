@@ -29,6 +29,27 @@
     </div>
 
 
+    @if (User.Identity.IsAuthenticated) 
+    {
+        <form asp-page-handler="CreateComment" class="p-3">
+            <input type="hidden" asp-for="NewComment.WorkoutId" />
+            <div class="d-flex comment p-3">
+                <div class="d-flex flex-column align-items-center flex-lg-shrink-0 mr-3">
+                    <i class="fa fa-user"></i>
+                    <span class="text-muted">@(DateTime.Now.ToShortDateString())</span>
+                </div>
+                <textarea class="w-100" rows="4" asp-for="NewComment.Text"></textarea>
+            </div>
+            <div class="d-flex justify-content-end my-2">
+                <button type="submit"  class="btn btn-outline-primary" value="">Make comment</button>
+            </div>
+        </form>
+    }
+    else
+    {
+        <div>You have to login to write comment!</div>
+    }
+
     <div class="row">
         <div class="col">
             @foreach (var comment in Model.Comments)

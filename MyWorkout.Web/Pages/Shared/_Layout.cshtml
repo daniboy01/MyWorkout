@@ -22,9 +22,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/WorkoutPlans/Index">Workouts</a>
                         </li>
-                        <li>
-                            <a class="nav-link text-dark" asp-area="" asp-page="/WorkoutPlans/AddWorkout">Add new workout</a>
-                        </li>
+                        @if (User.IsInRole("user"))
+                        {
+                            <li>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/WorkoutPlans/AddWorkout">Add new workout</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

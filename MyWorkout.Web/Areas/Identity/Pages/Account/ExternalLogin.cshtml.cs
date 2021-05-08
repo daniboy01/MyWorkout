@@ -52,6 +52,10 @@ namespace MyWorkout.Web.Areas.Identity.Pages.Account
             [Required]
             [EmailAddress]
             public string Email { get; set; }
+
+            [Required]
+            
+            public string Name { get; set; }
         }
 
         public IActionResult OnGetAsync()
@@ -122,7 +126,7 @@ namespace MyWorkout.Web.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = Input.Email, Email = Input.Email };
+                var user = new User { UserName = Input.Email, Email = Input.Email, DisplayName = Input.Name };
 
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)

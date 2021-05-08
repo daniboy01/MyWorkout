@@ -44,6 +44,17 @@ namespace MyWorkout.Web
                 .AddEntityFrameworkStores<MyWorkoutDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddAuthentication()
+                .AddMicrosoftAccount(options =>
+                {
+                    options.ClientId = Configuration["Authentication:Microsoft:ClientId"];
+                    options.ClientSecret = Configuration["Authentication:Microsoft:ClientSecret"];
+                })
+                .AddFacebook(options =>
+                {
+                    options.AppId = Configuration["Authentication:Facebook:AppId"];
+                    options.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+                });
 
             services.AddDistributedMemoryCache();
             services.AddSession(o =>

@@ -50,31 +50,28 @@ namespace MyWorkout.Bll.Services
             return exercises;
         }
 
-        public void EditWorkout(WorkoutPlan workoutPlan, int[] selectedExercises)
+        public void EditWorkout(WorkoutPlan workoutPlan, int[] selectedExercises, int categoryId)
         {
             WorkoutPlan workoutPlantoEdit = DbContext.WorkoutPlans.Where(w => w.Id == workoutPlan.Id).FirstOrDefault();
             var exercises = DbContext.Exercises.Where(e => selectedExercises.Contains(e.Id));
 
-            foreach(var exercise in exercises)
+            if(selectedExercises.Length != 0)
             {
-                exercise.WorkoutExercise.Add(new WorkoutExercise 
-                { 
-                    Exercise = exercise,
-                    ExerciseId = exercise.Id,
-                    WorkoutPlan = workoutPlantoEdit,
-                    WorkoutPlanId = workoutPlantoEdit.Id
-                });
-                //workoutPlantoEdit.WorkoutExercise.Add(new WorkoutExercise
-                //{
-                //    Exercise = exercise,
-                //    ExerciseId = exercise.Id,
-                //    WorkoutPlan = workoutPlantoEdit,
-                //    WorkoutPlanId = workoutPlantoEdit.Id
-                //});
+                foreach (var exercise in exercises)
+                {
+                    exercise.WorkoutExercise.Add(new WorkoutExercise
+                    {
+                        Exercise = exercise,
+                        ExerciseId = exercise.Id,
+                        WorkoutPlan = workoutPlantoEdit,
+                        WorkoutPlanId = workoutPlantoEdit.Id
+                    });
+                }
             }
 
             workoutPlantoEdit.Title = workoutPlan.Title;
             workoutPlantoEdit.Description = workoutPlan.Description;
+            workoutPlantoEdit.CategoryId = categoryId;
 
             DbContext.SaveChanges();
         }

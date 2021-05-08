@@ -39,7 +39,7 @@ namespace MyWorkout.Bll.Services
 
             using (var smtp = new SmtpClient())
             {
-                smtp.Connect( mailSettings.Host, mailSettings.Port, SecureSocketOptions.StartTls );
+                smtp.Connect( mailSettings.Host, mailSettings.Port, false );
                 smtp.Authenticate(mailSettings.Mail, mailSettings.Password);
 
                 await smtp.SendAsync(emailMessage);

@@ -47,6 +47,14 @@ namespace MyWorkout.Web.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
+            [Display(Name = "Full name")]
+            public string Name { get; set; }
+
+            [Required]
+            [Display(Name = "User name")]
+            public string UserName { get; set; }
+
+            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
@@ -75,7 +83,7 @@ namespace MyWorkout.Web.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = Input.Email, Email = Input.Email };
+                var user = new User { UserName = Input.UserName, Email = Input.Email, DisplayName = Input.Name };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

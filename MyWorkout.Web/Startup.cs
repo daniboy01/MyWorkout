@@ -83,6 +83,8 @@ namespace MyWorkout.Web
 
             app.UseRouting();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseSession();

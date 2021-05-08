@@ -17,18 +17,18 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex">
-                    <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/WorkoutPlans/Index">Workouts</a>
                         </li>
-                        @if (User.IsInRole("user"))
+                        @if (User.Identity.IsAuthenticated)
                         {
                             <li>
                                 <a class="nav-link text-dark" asp-area="" asp-page="/WorkoutPlans/AddWorkout">Add new workout</a>
                             </li>
                         }
                     </ul>
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>

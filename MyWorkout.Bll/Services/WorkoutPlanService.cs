@@ -13,11 +13,14 @@ namespace MyWorkout.Bll.Services
 {
     public class WorkoutPlanService
     {
+        private readonly ExerciseService exerciseService;
+
         public MyWorkoutDbContext DbContext { get; }
 
-        public WorkoutPlanService( MyWorkoutDbContext dbContext )
+        public WorkoutPlanService( MyWorkoutDbContext dbContext, ExerciseService exerciseService )
         {
             DbContext = dbContext;
+            this.exerciseService = exerciseService;
         }
 
         public async Task<WorkoutPlan> GetByIdAsync(int id)
@@ -47,12 +50,41 @@ namespace MyWorkout.Bll.Services
             return exercises;
         }
 
+        public void EditWorkout(WorkoutPlan workoutPlan, int[] selectedExercises)
+        {
+            WorkoutPlan workoutPlantoEdit = DbContext.WorkoutPlans.Where(w => w.Id == workoutPlan.Id).FirstOrDefault();
+            var exercises = DbContext.Exercises.Where(e => selectedExercises.Contains(e.Id));
+
+            foreach(var exercise in exercises)
+            {
+                exercise.WorkoutExercise.Add(new WorkoutExercise 
+                { 
+                    Exercise = exercise,
+                    ExerciseId = exercise.Id,
+                    WorkoutPlan = workoutPlantoEdit,
+                    WorkoutPlanId = workoutPlantoEdit.Id
+                });
+                //workoutPlantoEdit.WorkoutExercise.Add(new WorkoutExercise
+                //{
+                //    Exercise = exercise,
+                //    ExerciseId = exercise.Id,
+                //    WorkoutPlan = workoutPlantoEdit,
+                //    WorkoutPlanId = workoutPlantoEdit.Id
+                //});
+            }
+
+            workoutPlantoEdit.Title = workoutPlan.Title;
+            workoutPlantoEdit.Description = workoutPlan.Description;
+
+            DbContext.SaveChanges();
+        }
+
         public  PagedResult<WorkoutPlanDto> GetWorkouts( WorkoutPlanSpecification specification = null )
         {
             specification ??= new WorkoutPlanSpecification();
 
             if (specification.PageSize <= 0)
-                specification.PageSize = 10;
+                specification.PageSize = 50;
             if (specification.PageNumber <= 0)
                 specification.PageNumber = 1;
 

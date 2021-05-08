@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using MyWorkout.Bll.Dto;
 using MyWorkout.Dal;
 using System;
@@ -17,9 +18,9 @@ namespace MyWorkout.Bll.Services
             DbContext = dbContext;
         }
 
-        public IEnumerable<ExerciseDto> GetAllExerciseAsync()
+        public List<ExerciseDto> GetAllExerciseAsync()
         {
-            var exercises =   DbContext.Exercises.Select(e => new ExerciseDto 
+            var exercises =  DbContext.Exercises.Select(e => new ExerciseDto 
             {
                 Id = e.Id,
                 Title = e.Title,

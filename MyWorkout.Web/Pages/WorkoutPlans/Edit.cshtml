@@ -1,0 +1,27 @@
+﻿@page
+@model MyWorkout.Web.Pages.WorkoutPlans.EditModel
+@{
+}
+
+<div>
+    <form method="post">
+
+        <div class="mb-3">
+            <label class="form-label" asp-for="@Model.WorkoutPlan.Title">Workout name</label>
+            <input class="form-control" type="text" asp-for="@Model.WorkoutPlan.Title" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-label" asp-for="@Model.WorkoutPlan.Description">Workout name</label>
+            <input class="form-control" type="text" asp-for="@Model.WorkoutPlan.Description" />
+        </div>
+
+        <select asp-for="@Model.SelectedExercises" multiple="multiple">
+           @foreach(var e in Model.Exercises)
+            {
+                <option value="@e.Value">@e.Text</option>
+            }
+        </select>
+        <button class="btn-primary" type="submit">Edit workout</button>
+    </form>
+</div>

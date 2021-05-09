@@ -121,7 +121,7 @@ namespace MyWorkout.Web.Areas.Identity.Pages.Account.Manage
 
             if (CoverImage != null && CoverImage.Length > 0)
             {
-                var filePath = Path.Combine(this.env.WebRootPath, $"images/workoutPlan_covers/{user.Id}{ext}");
+                var filePath = Path.Combine(this.env.WebRootPath, $"images/users/{user.Id}{ext}");
                 using (var stream = System.IO.File.Create(filePath))
                 {
                     await CoverImage.CopyToAsync(stream);

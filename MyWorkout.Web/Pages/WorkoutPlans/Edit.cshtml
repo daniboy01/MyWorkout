@@ -4,7 +4,7 @@
 }
 
 <div>
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" >
 
         <div class="mb-3">
             <label class="form-label" asp-for="@Model.WorkoutPlan.Title">Workout name</label>
@@ -28,10 +28,6 @@
                 <option value="@c.Value">@c.Text</option>
             }
         </select>
-        <div class="form-group">
-            <label class="form-label" asp-for="CoverImage">Cover</label>
-            <input class="form-control" asp-for="CoverImage" />
-        </div>
 
         <button class="btn-primary" type="submit">Edit workout</button>
     </form>

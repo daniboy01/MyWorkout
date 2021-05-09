@@ -94,7 +94,7 @@ namespace MyWorkout.Bll.Services
             DbContext.SaveChanges();
         }
 
-        public int EditWorkout(WorkoutPlan workoutPlan, int[] selectedExercises, int categoryId)
+        public void EditWorkout(WorkoutPlan workoutPlan, int[] selectedExercises, int categoryId)
         {
             WorkoutPlan workoutPlantoEdit = DbContext.WorkoutPlans.Where(w => w.Id == workoutPlan.Id).FirstOrDefault();
             var exercises = DbContext.Exercises.Where(e => selectedExercises.Contains(e.Id));
@@ -119,7 +119,6 @@ namespace MyWorkout.Bll.Services
 
             DbContext.SaveChanges();
 
-            return workoutPlantoEdit.Id;
         }
 
         public  PagedResult<WorkoutPlanDto> GetWorkouts( WorkoutPlanSpecification specification = null )

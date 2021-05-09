@@ -2,22 +2,23 @@
 @model MyWorkout.Web.Pages.WorkoutPlans.MyWorkoutsModel
 @{
 }
-<h1>Az én edzés terveim</h1>
-
-@foreach (var plan in Model.MyWorkouts)
-{
-    <div class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex">
-        <div class="card">
-            <img class="card-img-top" src="~/images/workoutPlan_covers/blank.jpg"
-                 alt="@plan.Title" title="@plan.Title" />
-            <div class="card-body">
-                <h5 class="card-title">
-                    <a asp-page="/WorkoutPlans/Details" asp-route-id="@plan.Id">@plan.Title</a>
-                </h5>
-                <h6 class="card-subtitle">
-                    @plan.UserName
-                </h6>
+<h1 class="text-center">Az én edzés terveim</h1>
+<div class="row justify-content-center">
+    @foreach (var plan in Model.MyWorkouts)
+    {
+        <div class="col-sm-6 col-md-4 col-lg-3 mb-3 d-flex">
+            <div class="card">
+                <img class="card-img-top" src="~/images/workoutPlan_covers/blank.jpg"
+                     alt="@plan.Title" title="@plan.Title" />
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a asp-page="/WorkoutPlans/Details" asp-route-id="@plan.Id">@plan.Title</a>
+                    </h5>
+                    <h6 class="card-subtitle">
+                        @plan.UserName
+                    </h6>
+                </div>
             </div>
         </div>
-    </div>
-}
+    }
+</div>

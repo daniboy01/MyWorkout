@@ -4,12 +4,12 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="row">
+<div class="row justify-content-center">
     @foreach(var category in Model.CategoryHeaders)
      {
     <div class="col-md-4">
         <a asp-page="/WorkoutPlans/Index" asp-route-categoryId="@category.Id">
-            <h4 class="text-center">@category.Name</h4>
+            <h4>@category.Name</h4>
             <img src="~/images/category_covers/@(category.Id).jpg" />
         </a>
     </div>           

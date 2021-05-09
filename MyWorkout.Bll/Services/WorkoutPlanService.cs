@@ -45,6 +45,17 @@ namespace MyWorkout.Bll.Services
             return usersWorkouts;
         }
 
+        public string GetUserNameFromWorkout(int id)
+        {
+            var workout = DbContext.WorkoutPlans.Where(w => w.Id == id).First();
+            var userName = DbContext.Users.Where(u => u.Id == workout.UserId).First().UserName;
+            if(userName == null)
+            {
+                userName = "user";
+            }
+            return userName;
+        }
+
         public async Task<List<ExerciseDto>> GetExercisesFromWorkoutPlan(int workoutId)
         {
             //TODO ne mindet töltsem be, szűrni kell

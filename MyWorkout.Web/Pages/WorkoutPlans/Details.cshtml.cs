@@ -31,6 +31,7 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
         public WorkoutPlan WorkoutPlan { get; set; }
         public List<CommentDto> Comments { get; set; }
         public List<ExerciseDto> Exercises { get; set; }
+        public String UserName { get; set; }
 
         public async Task<IActionResult> OnGet()
         {
@@ -38,6 +39,8 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
             Comments = await CommentService.GetComments(Id);
             Exercises = await WorkoutPlanService.GetExercisesFromWorkoutPlan(Id);
             NewComment = new CommentDto { WorkoutId = Id };
+            UserName = WorkoutPlanService.GetUserNameFromWorkout(Id);
+
 
             return Page();
         }

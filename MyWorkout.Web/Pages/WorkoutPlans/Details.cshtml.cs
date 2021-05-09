@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Configuration;
 using MyWorkout.Bll.Dto;
 using MyWorkout.Bll.Services;
 using MyWorkout.Dal.Entities;
@@ -16,10 +17,12 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
         public WorkoutPlanService WorkoutPlanService { get; }
         public CommentService CommentService { get; }
 
+
         public DetailsModel(WorkoutPlanService workoutPlanService, CommentService commentService)
         {
             WorkoutPlanService = workoutPlanService;
             CommentService = commentService;
+
         }
 
         [BindProperty(SupportsGet = true)]

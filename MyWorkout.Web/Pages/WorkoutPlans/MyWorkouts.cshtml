@@ -1,0 +1,10 @@
+﻿@page
+@model MyWorkout.Web.Pages.WorkoutPlans.MyWorkoutsModel
+@{
+}
+<h1>Az én edzés terveim</h1>
+
+@foreach(var workout in Model.MyWorkouts)
+{
+   <h1>@workout.Title</h1>
+}

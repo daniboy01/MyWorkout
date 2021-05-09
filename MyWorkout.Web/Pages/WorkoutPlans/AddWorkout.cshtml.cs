@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -38,8 +39,8 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
 
         public async Task<IActionResult> OnPostAsync()
         {
-            
-            await workoutPlanService.AddNewWorkoutAsync(WorkoutPlan);
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            await workoutPlanService.AddNewWorkoutAsync(WorkoutPlan, userId);
             return new RedirectToPageResult("/WorkoutPlans/Index");
         }
 

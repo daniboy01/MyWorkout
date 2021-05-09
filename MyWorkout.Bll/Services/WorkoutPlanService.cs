@@ -30,6 +30,21 @@ namespace MyWorkout.Bll.Services
             return entity;
         }
 
+        public IEnumerable<WorkoutPlanDto> GetUsersWorkouts(int userId)
+        {
+            var usersWorkouts = DbContext.WorkoutPlans.Where(w => w.UserId == userId).Select(w => new WorkoutPlanDto
+            {
+                Id = w.Id,
+                Title = w.Title,
+                Description = w.Description,
+                UserId = userId,
+                CategoryId = w.CategoryId,
+                UserName = w.User.UserName,
+                CategoryName = w.Category.Name
+            }).ToList();
+            return usersWorkouts;
+        }
+
         public async Task<List<ExerciseDto>> GetExercisesFromWorkoutPlan(int workoutId)
         {
             //TODO ne mindet töltsem be, szűrni kell
@@ -148,7 +163,7 @@ namespace MyWorkout.Bll.Services
             };
         }
 
-        public async Task<WorkoutPlanDto> AddNewWorkoutAsync(WorkoutPlanDto dto)
+        public async Task<WorkoutPlanDto> AddNewWorkoutAsync(WorkoutPlanDto dto, int userId)
         {
             var workoutToSave = new WorkoutPlan
             {
@@ -156,6 +171,10 @@ namespace MyWorkout.Bll.Services
                 Description = dto.Description,
             };
 
+            var user = DbContext.Users.Where(u => u.Id == userId).FirstOrDefault();
+
+            workoutToSave.User = user;
+            workoutToSave.UserId = user.Id;
             await DbContext.WorkoutPlans.AddAsync(workoutToSave);
             DbContext.SaveChanges();
 

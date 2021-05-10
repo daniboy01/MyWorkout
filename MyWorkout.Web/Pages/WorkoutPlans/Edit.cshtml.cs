@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Ganss.XSS;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -53,7 +54,8 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
 
         public async Task<IActionResult> OnPost()
         {
-            
+            WorkoutPlan.Title = new HtmlSanitizer().Sanitize(WorkoutPlan.Title);
+            WorkoutPlan.Description = new HtmlSanitizer().Sanitize(WorkoutPlan.Description);
 
             WorkoutPlan.Id = Id;
             workoutPlanService.EditWorkout(WorkoutPlan, SelectedExercises, SelectedCategory);

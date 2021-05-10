@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Ganss.XSS;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -55,6 +56,10 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
 
         public async Task<IActionResult> OnPostAsync()
         {
+            WorkoutPlan.Title = new HtmlSanitizer().Sanitize(WorkoutPlan.Title);
+            WorkoutPlan.Description = new HtmlSanitizer().Sanitize(WorkoutPlan.Description);
+
+
             var fileName = CoverImage.FileName;
             var ext = Path.GetExtension(fileName).ToLowerInvariant();
 

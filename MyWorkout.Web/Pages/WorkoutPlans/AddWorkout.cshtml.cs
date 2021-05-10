@@ -14,6 +14,8 @@ using MyWorkout.Bll.Dto;
 using MyWorkout.Bll.Services;
 using MyWorkout.Web.Helpers;
 using MyWorkout.Web.Models;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
 
 namespace MyWorkout.Web.Pages.WorkoutPlans
 {
@@ -70,10 +72,9 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
             if (CoverImage != null && CoverImage.Length > 0)
             {
                 var filePath = Path.Combine(this.env.WebRootPath, $"images/workoutPlan_covers/{workout.Id}{ext}");
-                using (var stream = System.IO.File.Create(filePath))
-                {
-                    await CoverImage.CopyToAsync(stream);
-                }
+                using var image = Image.Load(CoverImage.OpenReadStream());
+                image.Mutate(x => x.Resize(50, 50));
+                image.Save(filePath);
             }
             return new RedirectToPageResult("/WorkoutPlans/Index");
         }

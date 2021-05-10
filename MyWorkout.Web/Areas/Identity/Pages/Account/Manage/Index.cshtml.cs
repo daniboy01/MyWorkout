@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
 using MyWorkout.Dal.Entities;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
 
 namespace MyWorkout.Web.Areas.Identity.Pages.Account.Manage
 {
@@ -122,10 +124,10 @@ namespace MyWorkout.Web.Areas.Identity.Pages.Account.Manage
             if (CoverImage != null && CoverImage.Length > 0)
             {
                 var filePath = Path.Combine(this.env.WebRootPath, $"images/users/{user.Id}{ext}");
-                using (var stream = System.IO.File.Create(filePath))
-                {
-                    await CoverImage.CopyToAsync(stream);
-                }
+
+                using var image = Image.Load(CoverImage.OpenReadStream());
+                image.Mutate(x => x.Resize(50, 50));
+                image.Save(filePath);
             }
 
             return RedirectToPage();

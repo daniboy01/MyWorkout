@@ -76,7 +76,7 @@ namespace MyWorkout.Bll.Services
             return exercises;
         }
 
-        public void CreateNewComment(CommentDto newComment)
+        public CommentDto CreateNewComment(CommentDto newComment)
         {
             var workout = DbContext.WorkoutPlans.Where(w => w.Id == newComment.WorkoutId).FirstOrDefault();
             var commentToSave = new Comment
@@ -92,6 +92,9 @@ namespace MyWorkout.Bll.Services
 
             DbContext.Comments.Add(commentToSave);
             DbContext.SaveChanges();
+
+            newComment.Id = commentToSave.Id;
+            return newComment;
         }
 
         public WorkoutPlanDto EditWorkout(WorkoutPlan workoutPlan, int[] selectedExercises, int categoryId)

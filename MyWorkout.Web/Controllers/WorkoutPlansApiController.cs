@@ -52,5 +52,20 @@ namespace MyWorkout.Web.Controllers
             return Ok(newWorkout);
 
         }
+
+        [HttpPost]
+        public IActionResult PostCommet([FromBody] CommentDto dto)
+        {
+            var newComment = WorkoutPlanService.CreateNewComment(dto);
+
+            if(newComment == null || String.IsNullOrEmpty(newComment.Id.ToString()))
+            {
+                return BadRequest();
+            }
+
+            return Ok(newComment);
+        }
+
+
     }
 }

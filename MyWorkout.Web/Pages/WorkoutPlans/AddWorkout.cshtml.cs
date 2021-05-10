@@ -78,7 +78,7 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
             {
                 var filePath = Path.Combine(this.env.WebRootPath, $"images/workoutPlan_covers/{workout.Id}{ext}");
                 using var image = Image.Load(CoverImage.OpenReadStream());
-                image.Mutate(x => x.Resize(50, 50));
+                image.Mutate(x => x.Resize(230, 350));
                 image.Save(filePath);
             }
             return new RedirectToPageResult("/WorkoutPlans/Index");

@@ -91,7 +91,7 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
             await subsrciptionService.NotifySubscriptedUsers(
                     userId,
                     $"New workout has been uploaded by {User.FindFirstValue(ClaimTypes.Name)}",
-                    $"Checkout <a href='/WorkoutPlans/Details?Id={workout.Id}'></a>"
+                    $"Checkout <a href='localhost:44361/WorkoutPlans/Details?Id={workout.Id}'>clicking here</a>."
                 );
 
             return new RedirectToPageResult("/WorkoutPlans/Index");

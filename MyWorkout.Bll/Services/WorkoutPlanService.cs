@@ -97,7 +97,7 @@ namespace MyWorkout.Bll.Services
             return newComment;
         }
 
-        public WorkoutPlanDto EditWorkout(WorkoutPlan workoutPlan, int[] selectedExercises, int categoryId)
+        public void EditWorkout(WorkoutPlan workoutPlan, int[] selectedExercises, int categoryId)
         {
             WorkoutPlan workoutPlantoEdit = DbContext.WorkoutPlans.Where(w => w.Id == workoutPlan.Id).FirstOrDefault();
             var exercises = DbContext.Exercises.Where(e => selectedExercises.Contains(e.Id));
@@ -122,16 +122,6 @@ namespace MyWorkout.Bll.Services
 
             DbContext.SaveChanges();
 
-            return new WorkoutPlanDto
-            {
-                Id = workoutPlantoEdit.Id,
-                Title = workoutPlantoEdit.Title,
-                Description = workoutPlantoEdit.Description,
-                UserId = workoutPlantoEdit.UserId,
-                CategoryId = workoutPlantoEdit.CategoryId,
-                UserName = workoutPlantoEdit.User.UserName,
-                CategoryName = workoutPlantoEdit.Category.Name
-            };
 
         }
 

@@ -69,7 +69,8 @@ namespace MyWorkout.Web
             services.AddScoped<WorkoutPlanService>()
                     .AddScoped<CommentService>()
                     .AddScoped<CategoryService>()
-                    .AddScoped<ExerciseService>();
+                    .AddScoped<ExerciseService>()
+                    .AddScoped<SubsrciptionService>();
 
 
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));

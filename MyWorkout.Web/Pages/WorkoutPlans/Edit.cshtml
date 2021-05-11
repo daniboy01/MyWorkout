@@ -3,32 +3,38 @@
 @{
 }
 
-<div>
-    <form method="post" >
+<div class="card justify-content-center">
+    <div class="card-body justify-content-center">
+        <form method="post">
 
-        <div class="mb-3">
-            <label class="form-label" asp-for="@Model.WorkoutPlan.Title">Workout name</label>
-            <input class="form-control" type="text" asp-for="@Model.WorkoutPlan.Title" />
-        </div>
+            <div class="mb-3">
+                <label class="form-label" asp-for="@Model.WorkoutPlan.Title">Workout name</label>
+                <input class="form-control" type="text" asp-for="@Model.WorkoutPlan.Title" />
+            </div>
 
-        <div class="form-group">
-            <label class="form-label" asp-for="@Model.WorkoutPlan.Description">Workout name</label>
-            <input class="form-control" type="text" asp-for="@Model.WorkoutPlan.Description" />
-        </div>
+            <div class="form-group">
+                <label class="form-label" asp-for="@Model.WorkoutPlan.Description">Workout name</label>
+                <input class="form-control" type="text" asp-for="@Model.WorkoutPlan.Description" />
+            </div>
 
-        <select asp-for="@Model.SelectedExercises" multiple="multiple">
-            @foreach (var e in Model.Exercises)
-            {
-                <option value="@e.Value">@e.Text</option>
-            }
-        </select>
-        <select asp-for="@Model.SelectedCategory">
-            @foreach (var c in Model.Categories)
-            {
-                <option value="@c.Value">@c.Text</option>
-            }
-        </select>
+            <div class="form-group">
+                <select asp-for="@Model.SelectedExercises" multiple="multiple">
+                    @foreach (var e in Model.Exercises)
+                    {
+                        <option value="@e.Value">@e.Text</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <select asp-for="@Model.SelectedCategory">
+                    @foreach (var c in Model.Categories)
+                    {
+                        <option value="@c.Value">@c.Text</option>
+                    }
+                </select>
+            </div>
 
-        <button class="btn-primary" type="submit">Edit workout</button>
-    </form>
+            <button class="btn-primary" type="submit">Edit workout</button>
+        </form>
+    </div>
 </div>

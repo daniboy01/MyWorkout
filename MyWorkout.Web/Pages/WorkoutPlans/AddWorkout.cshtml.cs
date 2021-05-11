@@ -26,15 +26,21 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
         private readonly ExerciseService exerciseService;
         private readonly IConfiguration config;
         private readonly IWebHostEnvironment env;
+        private readonly SubsrciptionService subsrciptionService;
         private readonly long fileSizeLimit;
         private List<string> permittedExtensions;
 
-        public AddWorkoutModel( WorkoutPlanService workoutPlanService, ExerciseService exerciseService, IConfiguration config, IWebHostEnvironment env)
+        public AddWorkoutModel( WorkoutPlanService workoutPlanService, 
+            ExerciseService exerciseService, 
+            IConfiguration config, 
+            IWebHostEnvironment env,
+            SubsrciptionService subsrciptionService)
         {
             this.workoutPlanService = workoutPlanService;
             this.exerciseService = exerciseService;
             this.config = config;
             this.env = env;
+            this.subsrciptionService = subsrciptionService;
             this.fileSizeLimit = config.GetValue<long>("FileSizeLimit");
             this.permittedExtensions = config.GetSection("PemittedExtensions").Get<List<string>>();
         }
@@ -81,6 +87,13 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
                 image.Mutate(x => x.Resize(230, 350));
                 image.Save(filePath);
             }
+
+            await subsrciptionService.NotifySubscriptedUsers(
+                    userId,
+                    $"New workout has been uploaded by {User.FindFirstValue(ClaimTypes.Name)}",
+                    $"Checkout <a href='/WorkoutPlans/Details?Id={workout.Id}'></a>"
+                );
+
             return new RedirectToPageResult("/WorkoutPlans/Index");
         }
 

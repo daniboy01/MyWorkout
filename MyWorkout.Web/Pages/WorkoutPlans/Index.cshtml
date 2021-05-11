@@ -4,11 +4,6 @@
 
 <div class="row">
 
-    <vc:pager page-size="@Model.WorkoutPlans.PageSize"
-              page-number="@Model.WorkoutPlans.PageNumber"
-              all-results-count="@Model.WorkoutPlans.AllResultsCount"
-              pages-to-show="3">
-    </vc:pager>
 
     @foreach (var plan in Model.WorkoutPlans.Results)
     {

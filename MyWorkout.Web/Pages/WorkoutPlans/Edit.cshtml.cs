@@ -54,9 +54,6 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
 
         public async Task<IActionResult> OnPost()
         {
-            WorkoutPlan.Title = new HtmlSanitizer().Sanitize(WorkoutPlan.Title);
-            WorkoutPlan.Description = new HtmlSanitizer().Sanitize(WorkoutPlan.Description);
-
             WorkoutPlan.Id = Id;
             workoutPlanService.EditWorkout(WorkoutPlan, SelectedExercises, SelectedCategory);
 

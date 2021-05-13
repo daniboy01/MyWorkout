@@ -62,11 +62,6 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
 
         public async Task<IActionResult> OnPostAsync()
         {
-            WorkoutPlan.Title = new HtmlSanitizer().Sanitize(WorkoutPlan.Title);
-            WorkoutPlan.Description = new HtmlSanitizer().Sanitize(WorkoutPlan.Description);
-
-           
-
             var fileName = CoverImage.FileName;
             var ext = Path.GetExtension(fileName).ToLowerInvariant();
 

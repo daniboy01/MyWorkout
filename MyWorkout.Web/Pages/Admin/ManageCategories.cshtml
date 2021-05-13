@@ -6,7 +6,7 @@
     <div class="col-md-3">
         @foreach(var c in Model.AllCategories)
             {
-                <h5>@c.Text</h5>
+                <a asp-route-categoryId="@c.Value">@c.Text</a> <br />
             }
     </div>
 
@@ -27,12 +27,12 @@
 
         <div class="from-group">
             <label asp-for="SelectedCategory.Name">Name of category</label>
-            <input class="from-controll" asp-for="SelectedCategory.Name" />
+            <input class="form-control" asp-for="SelectedCategory.Name" />
         </div>
 
         <div class="from-group">
             <label asp-for="SelectedCategory.ParentCategoryId">Name of category</label>
-            <select class="from-controll" asp-for="SelectedCategory.ParentCategoryId" asp-items="Model.AllCategories">
+            <select class="form-control" asp-for="SelectedCategory.ParentCategoryId" asp-items="Model.AllCategories">
                 <option value="">None</option>
             </select>
         </div>

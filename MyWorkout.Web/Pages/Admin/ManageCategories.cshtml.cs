@@ -56,11 +56,18 @@ namespace MyWorkout.Web.Pages.Admin
         {
             if( ModelState.IsValid)
             {
-                await categoryService.AddNewCategory(SelectedCategory);
+                await categoryService.AddOrUpdateCategory(SelectedCategory);
                 return new RedirectToPageResult("/Admin/ManageCategories");
             }
 
             return Page();
+        }
+
+        public async Task<IActionResult> OnPostDeleteAsync()
+        {
+            await categoryService.DeleteCategory(SelectedCategory.Id);
+            return new RedirectToPageResult("/Admin/ManageCategories");
+
         }
     }
 }

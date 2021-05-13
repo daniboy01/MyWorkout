@@ -30,26 +30,38 @@ namespace MyWorkout.Bll.Services
             return categories;
         }
 
-        public async Task<CategoryHeader> AddNewCategory(CategoryHeader categoryHeader)
+        public async Task AddOrUpdateCategory(CategoryHeader categoryHeader)
         {
-            var parentCategory = DbContext.Categories.Where(c => c.Id == categoryHeader.ParentCategoryId).FirstOrDefault();
 
-            Category newCategory = new Category
+            if(categoryHeader.Id == 0)
             {
-                Name = categoryHeader.Name,
-                ParentCategoryId = categoryHeader.ParentCategoryId,
-                ParentCategory = parentCategory
-            };
+                Category newCategory = new Category
+                {
+                    Name = categoryHeader.Name,
+                    ParentCategoryId = categoryHeader.ParentCategoryId,
+                };
 
-            await DbContext.AddAsync(newCategory);
+                await DbContext.AddAsync(newCategory);
+                await DbContext.SaveChangesAsync();
+            }
+            else
+            {
+                var category = DbContext.Categories.Single(c => c.Id == categoryHeader.Id);
+
+                category.Name = categoryHeader.Name;
+                category.ParentCategoryId = categoryHeader.ParentCategoryId;
+
+                await DbContext.SaveChangesAsync();
+
+            }
+        }
+
+        public async Task DeleteCategory( int categoryId)
+        {
+            DbContext.Categories.Remove(new Category { Id = categoryId });
+
             await DbContext.SaveChangesAsync();
 
-            return new CategoryHeader
-            {
-                Id = newCategory.Id,
-                Name = newCategory.Name,
-                ParentCategoryId = newCategory.ParentCategoryId
-            };
         }
     }
 }

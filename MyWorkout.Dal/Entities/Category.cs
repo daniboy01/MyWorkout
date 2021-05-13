@@ -10,7 +10,6 @@ namespace MyWorkout.Dal.Entities
         public Category()
         {
             ChildCategories = new HashSet<Category>();
-            WorkoutPlans = new HashSet<WorkoutPlan>();
         }
 
         public int Id { get; set; }
@@ -19,6 +18,5 @@ namespace MyWorkout.Dal.Entities
 
         public virtual Category ParentCategory { get; set; }
         public virtual ICollection<Category> ChildCategories { get; set; }
-        public virtual ICollection<WorkoutPlan> WorkoutPlans { get; set; }
     }
 }

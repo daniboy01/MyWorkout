@@ -30,7 +30,7 @@ namespace MyWorkout.Bll.Services
             return categories;
         }
 
-        public async Task AddOrUpdateCategory(CategoryHeader categoryHeader)
+        public async Task<int> AddOrUpdateCategory(CategoryHeader categoryHeader)
         {
 
             if(categoryHeader.Id == 0)
@@ -43,6 +43,7 @@ namespace MyWorkout.Bll.Services
 
                 await DbContext.AddAsync(newCategory);
                 await DbContext.SaveChangesAsync();
+                return newCategory.Id;
             }
             else
             {
@@ -52,13 +53,24 @@ namespace MyWorkout.Bll.Services
                 category.ParentCategoryId = categoryHeader.ParentCategoryId;
 
                 await DbContext.SaveChangesAsync();
+                return category.Id;
 
             }
         }
 
         public async Task DeleteCategory( int categoryId)
         {
-            DbContext.Categories.Remove(new Category { Id = categoryId });
+            var categoryToDelete = DbContext.Categories.Single(c => c.Id == categoryId);
+
+            var workoutsInCategory = DbContext.WorkoutPlans.Where(w => w.CategoryId == categoryId);
+
+            foreach(var workout in workoutsInCategory)
+            {
+                workout.CategoryId = null;
+                workout.Category = null;
+            }
+
+            DbContext.Categories.Remove(categoryToDelete);
 
             await DbContext.SaveChangesAsync();
 

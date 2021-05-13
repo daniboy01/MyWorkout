@@ -40,14 +40,12 @@ namespace MyWorkout.Bll.Services
             return newSub;
         }
 
-        public async Task NotifySubscriptedUsers(int userId, string text, string htmlMessage)
+        public async Task NotifySubscriptedUsers(string text, string htmlMessage)
         {
-            var email = dbContext.Users.Where(u => u.Id == userId).FirstOrDefault().Email;
-
             var subscriptions = GetAll();
             foreach(var sub in subscriptions)
             {
-                await emailSender.SendEmailAsync(email, text, htmlMessage);
+                await emailSender.SendEmailAsync(sub.User.Email, text, htmlMessage);
             }
         }
     }

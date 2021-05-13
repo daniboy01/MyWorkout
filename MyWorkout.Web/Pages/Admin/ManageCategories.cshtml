@@ -21,7 +21,7 @@
                 <h2>Add new category</h2>
             }
 
-    <form method="post" role="form">
+    <form method="post" role="form" enctype="multipart/form-data">
 
         <input type="hidden" asp-for="SelectedCategory.Id" />
 
@@ -37,16 +37,21 @@
             </select>
         </div>
 
+        <div class="form-group">
+            <label class="form-label" asp-for="CoverImage">Cover</label>
+            <input class="form-control" asp-for="CoverImage" />
+        </div>
+
         <div class="d-flex justify-content-between">
-            <button  asp-page-handler="AddOrUpdate" class="btn btn-primary">
+            <button asp-page-handler="AddOrUpdate" class="btn btn-primary">
                 @(Model.CategoryId == 0 ? "Add" : "Edit")
             </button>
 
-            @if(Model.SelectedCategory.Id != 0)
+            @if (Model.SelectedCategory.Id != 0)
             {
-            <button asp-page-handler="Delete" class="btn btn-danger">
-                Delete
-            </button>
+                <button asp-page-handler="Delete" class="btn btn-danger">
+                    Delete
+                </button>
             }
         </div>
 

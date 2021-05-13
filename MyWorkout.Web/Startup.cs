@@ -12,6 +12,7 @@ using MyWorkout.Dal;
 using MyWorkout.Dal.Entities;
 using MyWorkout.Dal.SeedInterfaces;
 using MyWorkout.Dal.SeedService;
+using MyWorkout.Dal.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,8 +38,6 @@ namespace MyWorkout.Web
                     o.EnableSensitiveDataLogging(true);
                 }); 
 
-            services.AddRazorPages();
-
 
             services.AddIdentity<User, IdentityRole<int>>()
                 .AddEntityFrameworkStores<MyWorkoutDbContext>()
@@ -55,6 +54,18 @@ namespace MyWorkout.Web
                     options.AppId = Configuration["Authentication:Facebook:AppId"];
                     options.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
                 });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole(Roles.Administrator));
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                options.LoginPath = "/Identity/Account/Login";
+                options.LogoutPath = "/Identity/Account/Logout";
+            });
 
             services.AddDistributedMemoryCache();
             services.AddSession(o =>
@@ -76,6 +87,12 @@ namespace MyWorkout.Web
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
 
             services.AddTransient<IEmailSender, EmailSender>();
+
+            services.AddRazorPages(options =>
+            {
+                options.Conventions.AuthorizeFolder("/Admin", "RequireAdministratorRole");
+            });
+
 
         }
 

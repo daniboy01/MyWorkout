@@ -19,8 +19,8 @@ namespace MyWorkout.Dal.SeedService
 
         public async Task SeedRoleAsync()
         {
-            if( !await roleManager.RoleExistsAsync( Roles.Adminnistrator))
-                await roleManager.CreateAsync(new IdentityRole<int> { Name = Roles.Adminnistrator });
+            if( !await roleManager.RoleExistsAsync( Roles.Administrator))
+                await roleManager.CreateAsync(new IdentityRole<int> { Name = Roles.Administrator });
             if (!await roleManager.RoleExistsAsync(Roles.User))
                 await roleManager.CreateAsync(new IdentityRole<int> { Name = Roles.User });
 

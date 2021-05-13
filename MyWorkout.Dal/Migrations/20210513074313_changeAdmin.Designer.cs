@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyWorkout.Dal;
 
 namespace MyWorkout.Dal.Migrations
 {
     [DbContext(typeof(MyWorkoutDbContext))]
-    partial class MyWorkoutDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210513074313_changeAdmin")]
+    partial class changeAdmin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -247,7 +249,7 @@ namespace MyWorkout.Dal.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 13, 9, 44, 58, 758, DateTimeKind.Unspecified).AddTicks(139), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 13, 9, 43, 12, 560, DateTimeKind.Unspecified).AddTicks(123), new TimeSpan(0, 2, 0, 0, 0)),
                             Text = "Ez aztán durva edzés terv",
                             UserID = 1,
                             WorkoutPlanId = 1
@@ -255,7 +257,7 @@ namespace MyWorkout.Dal.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 13, 9, 44, 58, 761, DateTimeKind.Unspecified).AddTicks(6314), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 13, 9, 43, 12, 563, DateTimeKind.Unspecified).AddTicks(4396), new TimeSpan(0, 2, 0, 0, 0)),
                             Text = "Ez aztán durva edzés terv",
                             UserID = 2,
                             WorkoutPlanId = 2
@@ -263,7 +265,7 @@ namespace MyWorkout.Dal.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 13, 9, 44, 58, 761, DateTimeKind.Unspecified).AddTicks(6406), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 13, 9, 43, 12, 563, DateTimeKind.Unspecified).AddTicks(4448), new TimeSpan(0, 2, 0, 0, 0)),
                             Text = "Ez aztán durva edzés terv",
                             UserID = 3,
                             WorkoutPlanId = 3
@@ -271,7 +273,7 @@ namespace MyWorkout.Dal.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 13, 9, 44, 58, 761, DateTimeKind.Unspecified).AddTicks(6417), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 13, 9, 43, 12, 563, DateTimeKind.Unspecified).AddTicks(4457), new TimeSpan(0, 2, 0, 0, 0)),
                             Text = "Ez aztán durva edzés terv",
                             UserID = 3,
                             WorkoutPlanId = 1
@@ -279,7 +281,7 @@ namespace MyWorkout.Dal.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 13, 9, 44, 58, 761, DateTimeKind.Unspecified).AddTicks(6424), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 13, 9, 43, 12, 563, DateTimeKind.Unspecified).AddTicks(4464), new TimeSpan(0, 2, 0, 0, 0)),
                             Text = "Ez aztán durva edzés terv",
                             UserID = 2,
                             WorkoutPlanId = 1
@@ -287,7 +289,7 @@ namespace MyWorkout.Dal.Migrations
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 13, 9, 44, 58, 761, DateTimeKind.Unspecified).AddTicks(6431), new TimeSpan(0, 2, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2021, 5, 13, 9, 43, 12, 563, DateTimeKind.Unspecified).AddTicks(4471), new TimeSpan(0, 2, 0, 0, 0)),
                             Text = "Ez aztán durva edzés terv",
                             UserID = 1,
                             WorkoutPlanId = 1
@@ -458,7 +460,7 @@ namespace MyWorkout.Dal.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "20bd6768-9264-4e0a-905b-515aa75855c0",
+                            ConcurrencyStamp = "7718b531-bcf0-4b2a-b8c9-b27694b72133",
                             DisplayName = "Megverj Elek",
                             Email = "megverjelek@example.com",
                             EmailConfirmed = false,
@@ -470,7 +472,7 @@ namespace MyWorkout.Dal.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ae4efa6b-1304-4a1d-ab76-b0e4e2de6e11",
+                            ConcurrencyStamp = "01c7e2ee-1512-4ab0-97eb-f8c591225c47",
                             DisplayName = "Egyip Tomi",
                             Email = "egyiptomi@example.com",
                             EmailConfirmed = false,
@@ -482,7 +484,7 @@ namespace MyWorkout.Dal.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f1df6d0f-52e2-41d8-bb6c-54af7a5d2f75",
+                            ConcurrencyStamp = "30759b22-2683-4159-9097-63ff406eaa5e",
                             DisplayName = "Fütty Imre",
                             Email = "füttyimre@example.com",
                             EmailConfirmed = false,

@@ -20,7 +20,7 @@ namespace MyWorkout.Dal.SeedService
         }
         public async Task SeedUserAsync()
         {
-            if ( !(await userManager.GetUsersInRoleAsync(Roles.Adminnistrator)).Any())
+            if ( !(await userManager.GetUsersInRoleAsync(Roles.Administrator)).Any())
             {
                 var admin = new User
                 {
@@ -39,7 +39,7 @@ namespace MyWorkout.Dal.SeedService
                 };
 
                 var createResult_admin = await userManager.CreateAsync(admin, "$Admin123");
-                var addToroleResult_admin = await userManager.AddToRoleAsync(admin, Roles.Adminnistrator);
+                var addToroleResult_admin = await userManager.AddToRoleAsync(admin, Roles.Administrator);
 
                 var createResult_user = await userManager.CreateAsync(user, "$Password123");
                 var addToroleResult_user = await userManager.AddToRoleAsync(user, Roles.User);

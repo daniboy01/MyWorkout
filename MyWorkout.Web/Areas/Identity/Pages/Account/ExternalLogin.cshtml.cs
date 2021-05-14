@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using MyWorkout.Dal.Entities;
+using MyWorkout.Dal.Users;
 
 namespace MyWorkout.Web.Areas.Identity.Pages.Account
 {
@@ -129,6 +130,8 @@ namespace MyWorkout.Web.Areas.Identity.Pages.Account
                 var user = new User { UserName = Input.Email, Email = Input.Email, DisplayName = Input.Name };
 
                 var result = await _userManager.CreateAsync(user);
+                await _userManager.AddToRoleAsync(user, Roles.User);
+
                 if (result.Succeeded)
                 {
                     result = await _userManager.AddLoginAsync(user, info);

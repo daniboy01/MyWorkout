@@ -17,7 +17,7 @@ namespace MyWorkout.Bll.Services
 
         public MyWorkoutDbContext DbContext { get; }
 
-        public WorkoutPlanService( MyWorkoutDbContext dbContext, ExerciseService exerciseService )
+        public WorkoutPlanService(MyWorkoutDbContext dbContext, ExerciseService exerciseService)
         {
             DbContext = dbContext;
             this.exerciseService = exerciseService;
@@ -25,7 +25,7 @@ namespace MyWorkout.Bll.Services
 
         public async Task<WorkoutPlan> GetByIdAsync(int id)
         {
-            var entity = await DbContext.WorkoutPlans.Include(w => w.WorkoutExercise).Where(w => w.Id == id).FirstAsync();
+            var entity = await DbContext.WorkoutPlans.Include(w => w.WorkoutExercise).Where(w => w.Id == id).SingleAsync();
 
             return entity;
         }
@@ -47,9 +47,9 @@ namespace MyWorkout.Bll.Services
 
         public string GetUserNameFromWorkout(int id)
         {
-            var workout = DbContext.WorkoutPlans.Where(w => w.Id == id).First();
-            var userName = DbContext.Users.Where(u => u.Id == workout.UserId).First().UserName;
-            if(userName == null)
+            var workout = DbContext.WorkoutPlans.Single(w => w.Id == id);
+            var userName = DbContext.Users.Single(u => u.Id == workout.UserId).UserName;
+            if (userName == null)
             {
                 userName = "user";
             }
@@ -58,10 +58,9 @@ namespace MyWorkout.Bll.Services
 
         public async Task<List<ExerciseDto>> GetExercisesFromWorkoutPlan(int workoutId)
         {
-            //TODO ne mindet töltsem be, szűrni kell
             var allExercise = DbContext.Exercises.ToList();
 
-            var workout = await DbContext.WorkoutPlans.FirstAsync(w => w.Id == workoutId);
+            var workout = await DbContext.WorkoutPlans.SingleAsync(w => w.Id == workoutId);
 
             var exerciseLIst = workout.WorkoutExercise;
 
@@ -78,7 +77,7 @@ namespace MyWorkout.Bll.Services
 
         public CommentDto CreateNewComment(CommentDto newComment)
         {
-            var workout = DbContext.WorkoutPlans.Where(w => w.Id == newComment.WorkoutId).FirstOrDefault();
+            var workout = DbContext.WorkoutPlans.Single(w => w.Id == newComment.WorkoutId);
             var commentToSave = new Comment
             {
                 Text = newComment.Text,
@@ -87,7 +86,6 @@ namespace MyWorkout.Bll.Services
                 CreatedAt = DateTime.Now,
 
             };
-            //workout.Comments.Add(commentToSave);
             commentToSave.WorkoutPlan = workout;
 
             DbContext.Comments.Add(commentToSave);
@@ -99,12 +97,14 @@ namespace MyWorkout.Bll.Services
 
         public void EditWorkout(WorkoutPlan workoutPlan, int[] selectedExercises, int categoryId)
         {
-            WorkoutPlan workoutPlantoEdit = DbContext.WorkoutPlans.Where(w => w.Id == workoutPlan.Id).FirstOrDefault();
-            var exercises = DbContext.Exercises.Where(e => selectedExercises.Contains(e.Id));
+            WorkoutPlan workoutPlantoEdit = DbContext.WorkoutPlans.Include(w => w.WorkoutExercise).Single(w => w.Id == workoutPlan.Id);
+            var exercises = DbContext.Exercises.Where(e => selectedExercises.Contains(e.Id)).ToList();
 
-            if(selectedExercises.Length != 0)
+            var exercisesInWorkout = workoutPlantoEdit.WorkoutExercise.Select(w => w.ExerciseId);
+
+            foreach (var exercise in exercises)
             {
-                foreach (var exercise in exercises)
+                if (!exercisesInWorkout.Contains(exercise.Id))
                 {
                     exercise.WorkoutExercise.Add(new WorkoutExercise
                     {
@@ -114,18 +114,20 @@ namespace MyWorkout.Bll.Services
                         WorkoutPlanId = workoutPlantoEdit.Id
                     });
                 }
+
             }
+
 
             workoutPlantoEdit.Title = workoutPlan.Title;
             workoutPlantoEdit.Description = workoutPlan.Description;
             workoutPlantoEdit.CategoryId = categoryId;
 
             DbContext.SaveChanges();
-
-
         }
 
-        public  PagedResult<WorkoutPlanDto> GetWorkouts( WorkoutPlanSpecification specification = null )
+
+
+        public PagedResult<WorkoutPlanDto> GetWorkouts(WorkoutPlanSpecification specification = null)
         {
             specification ??= new WorkoutPlanSpecification();
 
@@ -139,10 +141,10 @@ namespace MyWorkout.Bll.Services
             int allResultsCount = query.Count();
 
             query = query
-                .Skip( (specification.PageNumber - 1) * specification.PageSize )
-                .Take( specification.PageSize );
+                .Skip((specification.PageNumber - 1) * specification.PageSize)
+                .Take(specification.PageSize);
 
-            if( specification.CategoryId != null)
+            if (specification.CategoryId != null)
             {
                 query = query.Where(w => w.CategoryId == specification.CategoryId);
             }
@@ -156,7 +158,7 @@ namespace MyWorkout.Bll.Services
                     query = query.OrderByDescending(w => w.Title);
                     break;
             }
-                
+
 
             var workouts = query
                 .Select(w => new WorkoutPlanDto
@@ -187,7 +189,7 @@ namespace MyWorkout.Bll.Services
                 Description = dto.Description,
             };
 
-            var user = DbContext.Users.Where(u => u.Id == userId).FirstOrDefault();
+            var user = DbContext.Users.Single(u => u.Id == userId);
 
             workoutToSave.User = user;
             workoutToSave.UserId = user.Id;

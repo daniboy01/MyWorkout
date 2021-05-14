@@ -57,7 +57,7 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
             WorkoutPlan.Id = Id;
             workoutPlanService.EditWorkout(WorkoutPlan, SelectedExercises, SelectedCategory);
 
-            return RedirectToPage("/WorkoutPlans/Index");
+            return RedirectToPage("/WorkoutPlans/Details", new { id = Id });
         }
     }
 }

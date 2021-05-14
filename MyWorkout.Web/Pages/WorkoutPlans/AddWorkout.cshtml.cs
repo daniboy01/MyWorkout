@@ -62,33 +62,36 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var fileName = CoverImage.FileName;
-            var ext = Path.GetExtension(fileName).ToLowerInvariant();
-
-            if (string.IsNullOrEmpty(ext) || !permittedExtensions.Contains(ext))
+            if (ModelState.IsValid)
             {
+                var fileName = CoverImage.FileName;
+                var ext = Path.GetExtension(fileName).ToLowerInvariant();
 
-                ModelState.AddModelError("CoverImage", "Extension not permitted!");
+                if (string.IsNullOrEmpty(ext) || !permittedExtensions.Contains(ext))
+                {
 
-                return Page();
+                    ModelState.AddModelError("CoverImage", "Extension not permitted!");
+
+                    return Page();
+                }
+
+                var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                var workout = await workoutPlanService.AddNewWorkoutAsync(WorkoutPlan, userId);
+
+                if (CoverImage != null && CoverImage.Length > 0)
+                {
+                    var filePath = Path.Combine(this.env.WebRootPath, $"images/workoutPlan_covers/{workout.Id}{ext}");
+                    using var image = Image.Load(CoverImage.OpenReadStream());
+                    image.Mutate(x => x.Resize(230, 350));
+                    image.Save(filePath);
+                }
+
+                await subsrciptionService.NotifySubscriptedUsers(
+                        $"New workout has been uploaded by {User.FindFirstValue(ClaimTypes.Name)}",
+                        $"Checkout <a href='localhost:44361/WorkoutPlans/Details?Id={workout.Id}'>clicking here</a>."
+                    );
+                
             }
-
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            var workout = await workoutPlanService.AddNewWorkoutAsync(WorkoutPlan, userId);
-
-            if (CoverImage != null && CoverImage.Length > 0)
-            {
-                var filePath = Path.Combine(this.env.WebRootPath, $"images/workoutPlan_covers/{workout.Id}{ext}");
-                using var image = Image.Load(CoverImage.OpenReadStream());
-                image.Mutate(x => x.Resize(230, 350));
-                image.Save(filePath);
-            }
-
-            await subsrciptionService.NotifySubscriptedUsers(
-                    $"New workout has been uploaded by {User.FindFirstValue(ClaimTypes.Name)}",
-                    $"Checkout <a href='localhost:44361/WorkoutPlans/Details?Id={workout.Id}'>clicking here</a>."
-                );
-
             return new RedirectToPageResult("/WorkoutPlans/Index");
         }
 

@@ -10,6 +10,5 @@ namespace MyWorkout.Bll.Dto
         public int Id { get; set; }
         [Required]
         public string Name { get; set; }
-        public int? ParentCategoryId { get; set; }
     }
 }

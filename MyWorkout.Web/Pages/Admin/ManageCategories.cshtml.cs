@@ -78,28 +78,27 @@ namespace MyWorkout.Web.Pages.Admin
 
         public async Task<IActionResult> OnPostAddOrUpdateAsync()
         {
-            var fileName = CoverImage.FileName;
-            var ext = Path.GetExtension(fileName).ToLowerInvariant();
-            
 
-
-
-            if (string.IsNullOrEmpty(ext) || !permittedExtensions.Contains(ext))
-            {
-
-                ModelState.AddModelError("CoverImage", "Extension not permitted!");
-
-                return Page();
-            }
-
-
-            if ( ModelState.IsValid)
+            if ( ModelState.IsValid )
             {
                 int updatedOrNewCategoryId = await categoryService.AddOrUpdateCategory(SelectedCategory);
                 
 
                 if (CoverImage != null && CoverImage.Length > 0)
                 {
+
+                    var fileName = CoverImage.FileName;
+                    var ext = Path.GetExtension(fileName).ToLowerInvariant();
+
+                    if (string.IsNullOrEmpty(ext) || !permittedExtensions.Contains(ext))
+                    {
+
+                        ModelState.AddModelError("CoverImage", "Extension not permitted!");
+
+                        return Page();
+                    }
+
+
                     var filePath = Path.Combine(this.env.WebRootPath, $"images/category_covers/{updatedOrNewCategoryId}{ext}");
                     using var image = Image.Load(CoverImage.OpenReadStream());
                     image.Mutate(x => x.Resize(230, 350));

@@ -38,7 +38,6 @@ namespace MyWorkout.Bll.Services
                 Category newCategory = new Category
                 {
                     Name = categoryHeader.Name,
-                    ParentCategoryId = categoryHeader.ParentCategoryId,
                 };
 
                 await DbContext.AddAsync(newCategory);
@@ -50,7 +49,6 @@ namespace MyWorkout.Bll.Services
                 var category = DbContext.Categories.Single(c => c.Id == categoryHeader.Id);
 
                 category.Name = categoryHeader.Name;
-                category.ParentCategoryId = categoryHeader.ParentCategoryId;
 
                 await DbContext.SaveChangesAsync();
                 return category.Id;

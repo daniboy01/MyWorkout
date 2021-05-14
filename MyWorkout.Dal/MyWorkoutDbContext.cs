@@ -154,19 +154,16 @@ namespace MyWorkout.Dal
                     {
                         Id = 1,
                         Name = "Street Workout",
-                        ParentCategory = null,
                     },
                     new Category
                     {
                         Id = 2,
                         Name = "Gym Workout",
-                        ParentCategory = null,
                     },
                     new Category
                     {
                         Id = 3,
                         Name = "Cross-fitt",
-                        ParentCategory = null,
                     }
                 );
 

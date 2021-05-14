@@ -10,7 +10,7 @@
     <div class="col">
         <a asp-page="/WorkoutPlans/Index" asp-route-categoryId="@category.Id">
             <h4>@category.Name</h4>
-            <img src="~/images/category_covers/@(category.Id).jpg" />
+            <img src="~/images/category_covers/@(Model.LoadImage(category.Id))"  />
         </a>
     </div>           
      }

@@ -58,6 +58,7 @@ namespace MyWorkout.Web
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole(Roles.Administrator));
+                options.AddPolicy("RequiredUserRole", policy => policy.RequireRole(Roles.User, Roles.Administrator));
             });
 
             services.ConfigureApplicationCookie(options =>
@@ -91,6 +92,8 @@ namespace MyWorkout.Web
             services.AddRazorPages(options =>
             {
                 options.Conventions.AuthorizeFolder("/Admin", "RequireAdministratorRole");
+                options.Conventions.AuthorizePage("/WorkoutPlans/AddWorkout", "RequiredUserRole");
+                options.Conventions.AuthorizePage("/WorkoutPlans/Edit", "RequiredUserRole");
             });
 
 

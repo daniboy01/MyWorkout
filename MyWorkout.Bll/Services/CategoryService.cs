@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using MyWorkout.Bll.Dto;
 using MyWorkout.Dal;
 using MyWorkout.Dal.Entities;
@@ -18,12 +19,26 @@ namespace MyWorkout.Bll.Services
             DbContext = dbContext;
         }
 
+        public async Task<List<SelectListItem>> GetCategoryItems()
+        {
+            var categories = await DbContext.Categories.Select(c => new SelectListItem
+            {        
+                Text = c.Name,
+                Value = c.Id.ToString(),
+
+            }
+            ).ToListAsync();
+
+            return categories;
+        }
+
         public async Task<List<CategoryHeader>> GetCategories()
         {
             var categories = await DbContext.Categories.Select(c => new CategoryHeader
             {
                 Id = c.Id,
                 Name = c.Name
+
             }
             ).ToListAsync();
 

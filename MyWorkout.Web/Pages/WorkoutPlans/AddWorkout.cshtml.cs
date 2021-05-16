@@ -64,27 +64,31 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
         {
             if (ModelState.IsValid)
             {
-                var fileName = CoverImage.FileName;
-                var ext = Path.GetExtension(fileName).ToLowerInvariant();
-
-                if (string.IsNullOrEmpty(ext) || !permittedExtensions.Contains(ext))
-                {
-
-                    ModelState.AddModelError("CoverImage", "Extension not permitted!");
-
-                    return Page();
-                }
+               
 
                 var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
                 var workout = await workoutPlanService.AddNewWorkoutAsync(WorkoutPlan, userId);
 
                 if (CoverImage != null && CoverImage.Length > 0)
                 {
+                    var fileName = CoverImage.FileName;
+                    var ext = Path.GetExtension(fileName).ToLowerInvariant();
+
+
                     var filePath = Path.Combine(this.env.WebRootPath, $"images/workoutPlan_covers/{workout.Id}{ext}");
                     using var image = Image.Load(CoverImage.OpenReadStream());
                     image.Mutate(x => x.Resize(230, 350));
                     image.Save(filePath);
+
+                    if (string.IsNullOrEmpty(ext) || !permittedExtensions.Contains(ext))
+                    {
+
+                        ModelState.AddModelError("CoverImage", "Extension not permitted!");
+
+                        return Page();
+                    }
                 }
+
 
                 await subsrciptionService.NotifySubscriptedUsers(
                         $"New workout has been uploaded by {User.FindFirstValue(ClaimTypes.Name)}",

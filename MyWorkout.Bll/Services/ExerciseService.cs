@@ -18,9 +18,21 @@ namespace MyWorkout.Bll.Services
             DbContext = dbContext;
         }
 
+        public List<SelectListItem> GetAllExerciseItemAsync()
+        {
+            var exercises =  DbContext.Exercises.Select(e => new SelectListItem 
+            {
+                Text = e.Title,
+                Value = e.Id.ToString()
+            }
+            ).ToList();
+
+            return exercises;
+        }
+
         public List<ExerciseDto> GetAllExerciseAsync()
         {
-            var exercises =  DbContext.Exercises.Select(e => new ExerciseDto 
+            var exercises = DbContext.Exercises.Select(e => new ExerciseDto
             {
                 Id = e.Id,
                 Title = e.Title,

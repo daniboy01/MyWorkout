@@ -18,19 +18,15 @@
             </div>
 
             <div class="form-group">
-                <select asp-for="@Model.SelectedExercises" multiple="multiple">
-                    @foreach (var e in Model.Exercises)
-                    {
-                        <option value="@e.Value">@e.Text</option>
-                    }
+                <select asp-for="@Model.SelectedExercises" multiple="multiple"
+                        asp-items="@Model.Exercises">
+                    
                 </select>
             </div>
             <div class="form-group">
-                <select asp-for="@Model.SelectedCategory">
-                    @foreach (var c in Model.Categories)
-                    {
-                        <option value="@c.Value">@c.Text</option>
-                    }
+                <select asp-for="@Model.SelectedCategory"
+                        asp-items="@Model.Categories">
+                   
                 </select>
             </div>
 

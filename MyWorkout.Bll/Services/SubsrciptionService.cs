@@ -21,9 +21,9 @@ namespace MyWorkout.Bll.Services
             this.emailSender = emailSender;
         }
 
-        public List<Subscription> GetAll()
+        public Task<List<Subscription>> GetAll()
         {
-            return dbContext.Subscriptions.Include(s => s.User).ToList();
+            return dbContext.Subscriptions.Include(s => s.User).ToListAsync();
         }
 
         public Subscription CreateNewSubscription(int userID)
@@ -43,7 +43,7 @@ namespace MyWorkout.Bll.Services
 
         public async Task NotifySubscriptedUsers(string text, string htmlMessage)
         {
-            var subscriptions = GetAll();
+            var subscriptions = await GetAll();
 
 
             foreach(var sub in subscriptions)

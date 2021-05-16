@@ -35,20 +35,20 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
         public int Id { get; set; }
         [BindProperty]
         public WorkoutPlan WorkoutPlan  { get; set; }
-        public SelectList Exercises { get; set; }
+        public IEnumerable<SelectListItem> Exercises { get; set; }
         [BindProperty]
         public int[] SelectedExercises { get; set; }
         [BindProperty]
         public int SelectedCategory { get; set; }
-        public SelectList Categories { get; set; }
+        public IEnumerable<SelectListItem> Categories { get; set; }
 
 
 
         public async Task<IActionResult> OnGet()
         {
             WorkoutPlan = await workoutPlanService.GetByIdAsync(Id);
-            Exercises = new SelectList(exerciseService.GetAllExerciseAsync(), nameof(ExerciseDto.Id), nameof(ExerciseDto.Title));
-            Categories = new SelectList(await categoryService.GetCategories(), nameof(Category.Id), nameof(Category.Name));
+            Exercises =exerciseService.GetAllExerciseItemAsync();
+            Categories = await categoryService.GetCategoryItems();
             return Page();
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
@@ -14,15 +15,17 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
 {
     public class DetailsModel : PageModel
     {
+        private readonly IWebHostEnvironment env;
+
         public WorkoutPlanService WorkoutPlanService { get; }
         public CommentService CommentService { get; }
 
 
-        public DetailsModel(WorkoutPlanService workoutPlanService, CommentService commentService)
+        public DetailsModel(WorkoutPlanService workoutPlanService, CommentService commentService, IWebHostEnvironment env)
         {
             WorkoutPlanService = workoutPlanService;
             CommentService = commentService;
-
+            this.env = env;
         }
 
         [BindProperty(SupportsGet = true)]
@@ -64,6 +67,15 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
                 }
             }
             return Page();
+        }
+
+        public string LoadImage(int id)
+        {
+            if (System.IO.File.Exists($"{this.env.WebRootPath}/images/users/{id}.jpg"))
+            {
+                return $"{id}.jpg";
+            }
+            return "blank.png";
         }
     }
 }

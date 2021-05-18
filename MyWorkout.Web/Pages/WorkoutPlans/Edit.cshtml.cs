@@ -66,10 +66,15 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
 
         public async Task<IActionResult> OnPost()
         {
-            WorkoutPlan.Id = Id;
-            workoutPlanService.EditWorkout(WorkoutPlan, SelectedExercises, SelectedCategory);
+            if (ModelState.IsValid)
+            {
+                WorkoutPlan.Id = Id;
+                workoutPlanService.EditWorkout(WorkoutPlan, SelectedExercises, SelectedCategory);
 
+                return RedirectToPage("/WorkoutPlans/Details", new { id = Id });
+            }
             return RedirectToPage("/WorkoutPlans/Details", new { id = Id });
+
         }
     }
 }

@@ -33,7 +33,6 @@ namespace MyWorkout.Web.Pages.Admin
         public int CategoryId { get; set; }
 
 
-
         [BindProperty]
         public CategoryHeader SelectedCategory { get; set; }
 
@@ -52,8 +51,6 @@ namespace MyWorkout.Web.Pages.Admin
             this.fileSizeLimit = config.GetValue<long>("FileSizeLimit");
             this.permittedExtensions = config.GetSection("PemittedExtensions").Get<List<string>>();
         }
-
-
 
 
         public async Task OnGetAsync()
@@ -111,7 +108,7 @@ namespace MyWorkout.Web.Pages.Admin
                 return new RedirectToPageResult("/Admin/ManageCategories");
             }
 
-            return Page();
+            return new RedirectToPageResult("/Admin/ManageCategories");
         }
 
         public async Task<IActionResult> OnPostDeleteAsync()

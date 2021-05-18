@@ -64,7 +64,6 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
         {
             if (ModelState.IsValid)
             {
-               
 
                 var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
                 var workout = await workoutPlanService.AddNewWorkoutAsync(WorkoutPlan, userId);
@@ -96,7 +95,7 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
                     );
                 
             }
-            return new RedirectToPageResult("/WorkoutPlans/Index");
+            return new RedirectToPageResult("/WorkoutPlans/AddWorkout");
         }
 
     }

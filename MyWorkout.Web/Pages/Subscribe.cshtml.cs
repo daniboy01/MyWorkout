@@ -22,8 +22,13 @@ namespace MyWorkout.Web.Pages
 
         public IActionResult OnGet()
         {
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-            SubsrciptionService.CreateNewSubscription(userId);
+            var userClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if(userClaim != null)
+            {
+                var userId = int.Parse(userClaim);
+                SubsrciptionService.CreateNewSubscription(userId);
+                return new RedirectToPageResult("/WorkoutPlans/Index");
+            }
             return new RedirectToPageResult("/WorkoutPlans/Index");
         }
     }

@@ -93,7 +93,10 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
                         $"New workout has been uploaded by {User.FindFirstValue(ClaimTypes.Name)}",
                         $"Checkout <a href='localhost:44361/WorkoutPlans/Details?Id={workout.Id}'>clicking here</a>."
                     );
-                
+
+                return new RedirectToPageResult("/WorkoutPlans/Index");
+
+
             }
             return new RedirectToPageResult("/WorkoutPlans/AddWorkout");
         }

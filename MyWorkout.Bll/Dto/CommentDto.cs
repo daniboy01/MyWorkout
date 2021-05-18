@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace MyWorkout.Bll.Dto
@@ -7,6 +8,7 @@ namespace MyWorkout.Bll.Dto
     public class CommentDto
     {
         public int Id { get; set; }
+        [Required]
         public string Text { get; set; }
         public string  UserName { get; set; }
         public int UserId { get; set; }

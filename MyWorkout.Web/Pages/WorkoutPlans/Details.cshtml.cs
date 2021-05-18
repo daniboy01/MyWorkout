@@ -66,7 +66,7 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
                     ModelState.AddModelError("", "Hiba a comment létrehozásakor");
                 }
             }
-            return Page();
+            return RedirectToPage("/WorkoutPlans/Details", new { Id = NewComment.WorkoutId });
         }
 
         public string LoadImage(int id)

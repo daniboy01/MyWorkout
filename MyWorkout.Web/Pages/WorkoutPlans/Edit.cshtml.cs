@@ -50,16 +50,21 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
             WorkoutPlan = await workoutPlanService.GetByIdAsync(Id);
             var userClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            if(userClaim != null)
+            if (User.IsInRole("Administrator"))
+            {
+                Exercises = exerciseService.GetAllExerciseItemAsync();
+                Categories = await categoryService.GetCategoryItems();
+                return Page();
+            }
+
+            if (userClaim != null)
             {
                 var userId = int.Parse(userClaim);
-                if (WorkoutPlan.Id != userId)
+                if (WorkoutPlan.UserId != userId)
                     return RedirectToPage("/WorkoutPlans/Index");
             }
 
-            
-
-            Exercises =exerciseService.GetAllExerciseItemAsync();
+            Exercises = exerciseService.GetAllExerciseItemAsync();
             Categories = await categoryService.GetCategoryItems();
             return Page();
         }

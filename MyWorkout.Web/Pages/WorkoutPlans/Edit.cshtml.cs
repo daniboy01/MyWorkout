@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Ganss.XSS;
 using Microsoft.AspNetCore.Hosting;
@@ -47,6 +48,17 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
         public async Task<IActionResult> OnGet()
         {
             WorkoutPlan = await workoutPlanService.GetByIdAsync(Id);
+            var userClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if(userClaim != null)
+            {
+                var userId = int.Parse(userClaim);
+                if (WorkoutPlan.Id != userId)
+                    return RedirectToPage("/WorkoutPlans/Index");
+            }
+
+            
+
             Exercises =exerciseService.GetAllExerciseItemAsync();
             Categories = await categoryService.GetCategoryItems();
             return Page();

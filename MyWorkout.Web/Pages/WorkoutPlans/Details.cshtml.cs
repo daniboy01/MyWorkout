@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Ganss.XSS;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -57,8 +58,14 @@ namespace MyWorkout.Web.Pages.WorkoutPlans
             {
                 try
                 {
-                    NewComment.UserId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-                    WorkoutPlanService.CreateNewComment(NewComment);
+                    NewComment.Text = new HtmlSanitizer().Sanitize(NewComment.Text);
+                    if (!String.IsNullOrEmpty(NewComment.Text))
+                    {
+                        NewComment.UserId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+                        WorkoutPlanService.CreateNewComment(NewComment);
+                        return RedirectToPage("/WorkoutPlans/Details", new { Id = NewComment.WorkoutId });
+                    }
+
                     return RedirectToPage("/WorkoutPlans/Details", new { Id = NewComment.WorkoutId });
                 }
                 catch( Exception ex)
